@@ -23,24 +23,39 @@ and 2; `panel_test.py led 0|3` drives red (was `0|2` on v0.4r1).
 Footprint `Resistor_SMD:R_0201_0603Metric` → `Resistor_SMD:R_0402_1005Metric` (pads 0.54 × 0.64 mm at ±0.51 mm),
 bottom side, same rotation. Schematic values stay symbolic (`R_T0`…`R_T3`); the part is in the LCSC field.
 
+Values were chosen 2026-09-26 to **maximise LED current within the 0.2 W rating using parts in stock** (the spec's
+33 Ω / 56 Ω pair was the starting point; 56 Ω 0.2 W 0402 had zero stock at every brand):
+
 | bank (refs) | colour | value | part in BOM | LCSC | JLCPCB/LCSC stock 2026-09-26 |
 |---|---|---|---|---|---|
-| R_T0 (R9, R13, R17, R21, R25), R_T3 (R12, R16, R20, R24, R28) | red | 33 Ω 1 % 0.2 W | Panasonic ERJ-PA2F33R0X | **C427231** | 7 919 |
-| R_T1 (R10, R14, R18, R22, R26), R_T2 (R11, R15, R19, R23, R27) | IR | 56 Ω 1 % 0.2 W | Panasonic ERJ-PA2F56R0X | **C427233** | **0** |
+| R_T0 (R9, R13, R17, R21, R25), R_T3 (R12, R16, R20, R24, R28) | red | 22 Ω 1 % 0.2 W | Vishay CRCW040222R0FKEDHP (CRCW-HP e3) | **C313374** | 15 410 (alt. Panasonic ERJ-PA2F22R0X C427230, 7 962) |
+| R_T1 (R10, R14, R18, R22, R26), R_T2 (R11, R15, R19, R23, R27) | IR | 47 Ω 1 % 0.2 W | ROHM ESR01MZPF47R0 | **C5736551** | 20 000 (alt. Yageo SR0402FR-7T47RL C854484, 3 869; Panasonic ERJ-PA2F47R0X C427232, 103) |
 
-Stock check (JLCPCB parts API, extended parts): Vishay CRCW040233R0FKEDHP = C313396, stock 0;
-CRCW040256R0FKEDHP is not in the catalogue; no 56 Ω 0.2 W 0402 of any brand was in stock (Panasonic, Vishay
-RCS0402, ROHM ESR01, KOA SG73P, Stackpole RPC0402, Yageo SR0402 all 0). In-stock 0.2 W 0402 neighbours for the IR
-bank, to decide at order time:
+Operating points from the analysis-doc model (5 V, 1.3 Ω source, 0.55 Ω sink shared by the row, red V_F = 1.79 V +
+8 Ω·I, IR V_F = 1.34 V + 3 Ω·I, checkerboard so every row has 10 red + 10 IR), full-field at duty 255:
 
-| value | part | LCSC | stock | IR bank result (full-field, from the analysis model) |
-|---|---|---|---|---|
-| 47 Ω | Panasonic ERJ-PA2F47R0X / Yageo SR0402FR-7T47RL / ROHM ESR01MZPF47R0 | C427232 / C854484 / C5736551 | 103 / 3 869 / 20 000 | ≈58–64 mA, ≈150–170 mW (75–85 %) |
-| 56 Ω (spec) | Panasonic ERJ-PA2F56R0X | C427233 | 0 | 50–55 mA, 125–154 mW (63–77 %) |
-| 68 Ω | Panasonic ERJ-PA2F68R0X | C542959 | 6 057 | ≈43–47 mA, ≈115–135 mW (58–68 %) |
-| 100 Ω ("IR unchanged") | Panasonic ERJ-PA2F1000X / Vishay CRCW0402100RFKEDHP | C427235 / C844502 | 38 693 / 4 754 | ≈30 mA, 80 mW (40 %) |
+| | red 22 Ω | IR 47 Ω |
+|---|---|---|
+| own colour only: I, resistor power | 87 mA, 151 mW (75 %) | 64 mA, 176 mW (88 %) |
+| red + IR all on: I | 80 mA | 59 mA |
+| vs v0.4r1 (100 Ω) | ×3.1 | ×1.9 |
+| LED rating used | 47 % of 185 mA peak (1/10 duty, ≤0.1 ms — our 45 µs / 4.5 % qualifies); 30 mA DC | 500 mA peak is specified only for ≤1 % duty; 70 mA DC; average here is 3 mA |
 
-Standard 1/16 W 0402 parts must not be substituted.
+Row current all-on 1.29 A → row-sink drop 0.71 V (red falls ≈8 % when the IR bank is also lit) and ≈0.65 V droop of
+the 5 V rail across the 45 µs pulse with the existing 18 × 10 µF (no room for more bulk capacitance, see §5).
+Sensitivity: the red resistor power depends on the LED's dynamic resistance, which the datasheet gives only to
+30 mA; at 4 Ω instead of 8 Ω the 22 Ω part would run at 90 %. **Before ordering, pulse one loose Kingbright LED at
+80–100 mA and check V_F; if it is below ≈2.5 V at 90 mA, use 27 Ω (Vishay RCS040227R0FKED, C2100055, 6 536 in stock;
+77 mA, 72–83 %).** 68 Ω (Panasonic ERJ-PA2F68R0X, C542959) is the conservative IR fallback (47 mA, 68 %).
+
+Not in stock at any brand on 2026-09-26: 18, 24, 30, 39, 43, 51, 56, 62 Ω (0.2 W 0402 ±1 %). Standard 1/16 W 0402
+parts must not be substituted. The only 0402 rated above 0.2 W in stock (KOA SG73P1EW, 0.25 W) is a wide-terminal
+part that does not fit this land pattern.
+
+**Supply current:** with one row active at a time for 45 of every 50 µs, the panel's 5 V current is 0.9 × the row
+current, i.e. ≈1.16 A average (1.29 A pulses, ≈1.22 A RMS) for a full-field red+IR pattern at duty 255; ≈0.78 A
+red-only, ≈0.58 A IR-only; v0.4r1 was ≈0.52 A all-on. The "≈50 mA" in the analysis doc multiplied the row current by
+the per-LED duty and is wrong by ×20; the 5 V entry and the inter-panel bus must be checked against these numbers.
 
 ## 3. Layout
 

@@ -1,6 +1,6 @@
 """Text pass on the saved board: for footprints R9-R28 add the LCSC Part # property and drop KiLib_Generator."""
 import re, sys
-LCSC = {'R_T0': 'C427231', 'R_T3': 'C427231', 'R_T1': 'C427233', 'R_T2': 'C427233'}
+LCSC = {'R_T0': 'C313374', 'R_T3': 'C313374', 'R_T1': 'C5736551', 'R_T2': 'C5736551'}   # 22 Ω Vishay CRCW040222R0FKEDHP / 47 Ω ROHM ESR01MZPF47R0, 0.2 W
 s = open(sys.argv[1]).read()
 parts = re.split(r'(\n\t\(footprint )', s); out = [parts[0]]; n = 0
 for i in range(1, len(parts), 2):
