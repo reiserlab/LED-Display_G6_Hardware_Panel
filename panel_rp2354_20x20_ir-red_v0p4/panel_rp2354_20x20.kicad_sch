@@ -6,7 +6,7 @@
 	(paper "USLetter")
 	(title_block
 		(title "G6 RIRI 45mm RP2354")
-		(date "2026-08-26")
+		(date "2026-09-26")
 		(rev "v0.4.0")
 		(company "Reiserlab @ Janelia")
 	)
