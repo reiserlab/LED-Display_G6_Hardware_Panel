@@ -99770,7 +99770,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC Part #" "C5736551"
+		(property "LCSC Part #" "C427235"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -100340,7 +100340,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC Part #" "C313374"
+		(property "LCSC Part #" "C5736551"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -104031,7 +104031,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC Part #" "C313374"
+		(property "LCSC Part #" "C5736551"
 			(at 0 0 -90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -105131,7 +105131,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC Part #" "C313374"
+		(property "LCSC Part #" "C5736551"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -111278,7 +111278,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC Part #" "C313374"
+		(property "LCSC Part #" "C5736551"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -113090,7 +113090,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC Part #" "C313374"
+		(property "LCSC Part #" "C5736551"
 			(at 0 0 -90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -116522,7 +116522,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC Part #" "C5736551"
+		(property "LCSC Part #" "C427235"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -120919,7 +120919,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC Part #" "C5736551"
+		(property "LCSC Part #" "C427235"
 			(at 0 0 -90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -123291,7 +123291,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC Part #" "C5736551"
+		(property "LCSC Part #" "C427235"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -125112,7 +125112,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC Part #" "C313374"
+		(property "LCSC Part #" "C5736551"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -126420,7 +126420,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC Part #" "C5736551"
+		(property "LCSC Part #" "C427235"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -131347,7 +131347,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC Part #" "C313374"
+		(property "LCSC Part #" "C5736551"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -133653,7 +133653,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC Part #" "C5736551"
+		(property "LCSC Part #" "C427235"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -133811,7 +133811,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC Part #" "C313374"
+		(property "LCSC Part #" "C5736551"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -133969,7 +133969,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC Part #" "C313374"
+		(property "LCSC Part #" "C5736551"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -134127,7 +134127,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC Part #" "C5736551"
+		(property "LCSC Part #" "C427235"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -135029,7 +135029,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC Part #" "C5736551"
+		(property "LCSC Part #" "C427235"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -136500,7 +136500,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC Part #" "C313374"
+		(property "LCSC Part #" "C5736551"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -137070,7 +137070,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC Part #" "C5736551"
+		(property "LCSC Part #" "C427235"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -137228,7 +137228,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC Part #" "C5736551"
+		(property "LCSC Part #" "C427235"
 			(at 0 0 -90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -137352,7 +137352,7 @@
 		(layer "Edge.Cuts")
 		(uuid "2ee1943b-4e79-4854-96aa-a789d2bffa39")
 	)
-	(gr_text "R: 22|47Ω"
+	(gr_text "R: 47|100Ω"
 		(at 72.2 83.8 0)
 		(layer "B.SilkS")
 		(uuid "61df9979-e8a5-45d6-a586-95050794a67a")

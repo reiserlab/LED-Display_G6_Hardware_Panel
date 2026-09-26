@@ -16,50 +16,50 @@ LED footprints and all other parts are unchanged.
 
 Changed the `LCSC Part #` field on the 200 `LED_T2`/`LED_T3` symbols in `panel_led.kicad_sch` and on their PCB
 footprints. No net or layout change. The bottom silkscreen legend was updated to match (`0|3: APHHS1005SURCK`,
-`1|2: IN-S42CTQIR`, `R: 22|47Ω`; was `0|2`, `1|3`, `R: 100Ω ±1%`). **Firmware:** red = channels 0 and 3 (`sch_col % 4 ∈ {0,3}`), IR = channels 1
+`1|2: IN-S42CTQIR`, `R: 47|100Ω`; was `0|2`, `1|3`, `R: 100Ω ±1%`). **Firmware:** red = channels 0 and 3 (`sch_col % 4 ∈ {0,3}`), IR = channels 1
 and 2; `panel_test.py led 0|3` drives red (was `0|2` on v0.4r1).
 
 ## 2. Column resistors R9–R28
 
 Footprint `Resistor_SMD:R_0201_0603Metric` → `Resistor_SMD:R_0402_1005Metric` (pads 0.54 × 0.64 mm at ±0.51 mm),
-bottom side, same rotation. Schematic values stay symbolic (`R_T0`…`R_T3`); the part is in the LCSC field.
+bottom side, same rotation. Schematic values stay symbolic (`R_T0`…`R_T3`); the part is in the LCSC field. The bottom
+silkscreen legend reads `R: 47|100Ω`.
 
-Values were chosen 2026-09-26 to **maximise LED current within the 0.2 W rating using parts in stock** (the spec's
-33 Ω / 56 Ω pair was the starting point; 56 Ω 0.2 W 0402 had zero stock at every brand):
+Values (final, 2026-09-26): a **conservative design around 0.7 A per panel**. The spec's 33 Ω / 56 Ω pair had no
+56 Ω stock; a 22 Ω / 47 Ω "maximum current" variant was evaluated and rejected because it draws ≈1.2 A per panel and
+droops the 5 V rail below the drivers' 4.5 V minimum (see the Codex cross-review notes in the PR). All parts 0.2 W
+"high-power" 0402, ±1 %, in stock at JLCPCB/LCSC:
 
-| bank (refs) | colour | value | part in BOM | LCSC | JLCPCB/LCSC stock 2026-09-26 |
+| bank (refs) | colour | value | part in BOM | LCSC | stock 2026-09-26 |
 |---|---|---|---|---|---|
-| R_T0 (R9, R13, R17, R21, R25), R_T3 (R12, R16, R20, R24, R28) | red | 22 Ω 1 % 0.2 W | Vishay CRCW040222R0FKEDHP (CRCW-HP e3) | **C313374** | 15 410 (alt. Panasonic ERJ-PA2F22R0X C427230, 7 962) |
-| R_T1 (R10, R14, R18, R22, R26), R_T2 (R11, R15, R19, R23, R27) | IR | 47 Ω 1 % 0.2 W | ROHM ESR01MZPF47R0 | **C5736551** | 20 000 (alt. Yageo SR0402FR-7T47RL C854484, 3 869; Panasonic ERJ-PA2F47R0X C427232, 103) |
+| R_T0 (R9, R13, R17, R21, R25), R_T3 (R12, R16, R20, R24, R28) | red | 47 Ω 1 % 0.2 W | ROHM ESR01MZPF47R0 | **C5736551** | 20 000 (alt. Yageo SR0402FR-7T47RL C854484, 3 869) |
+| R_T1 (R10, R14, R18, R22, R26), R_T2 (R11, R15, R19, R23, R27) | IR | 100 Ω 1 % 0.2 W | Panasonic ERJ-PA2F1000X | **C427235** | 38 693 (alt. Vishay CRCW0402100RFKEDHP C844502, 4 754) |
 
 Operating points from the analysis-doc model (5 V, 1.3 Ω source, 0.55 Ω sink shared by the row, red V_F = 1.79 V +
 8 Ω·I, IR V_F = 1.34 V + 3 Ω·I, checkerboard so every row has 10 red + 10 IR), full-field at duty 255:
 
-| | red 22 Ω | IR 47 Ω |
+| | red 47 Ω | IR 100 Ω |
 |---|---|---|
-| own colour only: I, resistor power | 87 mA, 151 mW (75 %) | 64 mA, 176 mW (88 %) |
-| red + IR all on: I | 79 mA | 57 mA |
-| vs v0.4r1 (100 Ω) | ×3.1 | ×1.9 |
-| LED rating used | 47 % of 185 mA peak (1/10 duty, ≤0.1 ms — our 45 µs / 4.5 % qualifies); 30 mA DC | 500 mA peak is specified only for ≤1 % duty; 70 mA DC; average here is 3 mA |
+| own colour only: I, resistor power | 52 mA, 114 mW (57 %) | 33 mA, 100 mW (50 %) |
+| red + IR all on: I | 49 mA | 31 mA |
+| vs v0.4r1 (100 Ω 0201) | ×2.0 current | ×1.0 (unchanged), resistor now at 50 % instead of 198 % |
+| LED rating used | 28 % of the 185 mA pulse rating; 30 mA DC | 47 % of 70 mA DC; 500 mA pulse |
 
-Row current all-on 1.36 A → row-sink drop 0.75 V (red falls ≈10 % when the IR bank is also lit) and ≈0.68 V droop of
-the 5 V rail across the 45 µs pulse with the existing 18 × 10 µF (no room for more bulk capacitance, see §5). A 5.0 V
-rail therefore sags to ≈4.3 V at the end of an all-on pulse, below the UCC27517's 4.5 V minimum recommended VDD and
-approaching its UVLO (4.2 V typ on, 3.9 V off); on a 4.75 V USB-class supply it would cross it. **Bench-verify VDD at
-the driver pins under full-field load before committing to these values.**
-Sensitivity: the red resistor power depends on the LED's dynamic resistance, which the datasheet gives only to
-30 mA; at 4 Ω instead of 8 Ω the 22 Ω part would run at 90 %. **Before ordering, pulse one loose Kingbright LED at
-80–100 mA and check V_F; if it is below ≈2.5 V at 90 mA, use 27 Ω (Vishay RCS040227R0FKED, C2100055, 6 536 in stock;
-77 mA, 72–83 %).** 68 Ω (Panasonic ERJ-PA2F68R0X, C542959) is the conservative IR fallback (47 mA, 68 %).
+Row current all-on 0.80 A → row-sink drop 0.44 V (red falls ≈6 % when the IR bank is also lit); 5 V droop ≈0.40 V
+over the 45 µs pulse with the existing 18 × 10 µF, i.e. a 5.0 V rail stays at ≈4.6 V, above the UCC27517's 4.5 V
+minimum recommended VDD. The red resistor is insensitive to the LED V-I extrapolation at this current (≤64 % of
+rating even with a 4 Ω dynamic resistance).
 
-Not in stock at any brand on 2026-09-26: 18, 24, 30, 39, 43, 51, 56, 62 Ω (0.2 W 0402 ±1 %). Standard 1/16 W 0402
-parts must not be substituted. The only 0402 rated above 0.2 W in stock (KOA SG73P1EW, 0.25 W) is a wide-terminal
-part that does not fit this land pattern.
+**Supply current:** one row is on for 45 of every 50 µs, so the panel's 5 V current is 0.9 × the row current:
+≈**0.72 A average** (0.80 A pulses, ≈0.76 A RMS) for a full-field red+IR pattern at duty 255; ≈0.47 A red-only,
+≈0.30 A IR-only; v0.4r1 was ≈0.53 A all-on. The "≈50 mA" in the analysis doc multiplied the row current by the
+per-LED duty and is wrong by ×20; the JST SH 5 V entry (≈1 A/contact) and the single 5 V pin per inter-panel header
+still deserve a check for multi-panel arenas.
 
-**Supply current:** with one row active at a time for 45 of every 50 µs, the panel's 5 V current is 0.9 × the row
-current, i.e. ≈1.22 A average (1.36 A pulses, ≈1.29 A RMS) for a full-field red+IR pattern at duty 255; ≈0.78 A
-red-only, ≈0.58 A IR-only; v0.4r1 was ≈0.53 A all-on. The "≈50 mA" in the analysis doc multiplied the row current by
-the per-LED duty and is wrong by ×20; the 5 V entry and the inter-panel bus must be checked against these numbers.
+Alternatives at the same ≈0.72 A budget: 68 Ω / 68 Ω (red ×1.5, IR ×1.5, 46 % / 68 %). Higher-output options that were
+modelled: 33/100 Ω (0.84 A, red ×2.5), 27/100 Ω (0.92 A, red ×2.9), 22/47 Ω (1.22 A, red ×3.3, IR ×2.0 — rejected).
+Standard 1/16 W 0402 parts must not be substituted. Not in stock at any brand on 2026-09-26: 18, 24, 30, 39, 43, 51,
+56, 62 Ω (0.2 W 0402 ±1 %).
 
 ## 3. Layout
 
@@ -158,7 +158,7 @@ At the project's own rules (0.125 mm) the copper DRC is clean apart from the cou
   0.2 mm there is no free bottom-side area for a 1206 or 0805 within 4 mm of any column driver U3–U22; the only
   1206-sized free area on the bottom side is at ≈(76.7, 64.0), 8 mm from U22, fitting one part. Adding 2–4 ×
   22–47 µF therefore needs parts moved and is left for a layout revision; expect ≈0.68 V droop on the 45 µs
-  all-on pulse (1.36 A) with the existing 18 × 10 µF.
+  all-on pulse at the rejected 22/47 Ω point; ≈0.40 V at the chosen 47/100 Ω.
 - **Other variants:** the layout part of this change (`tools/column_resistors_0402/`) applies unchanged to
   `panel_rp2354_20x20_four-color_v0p4` and `panel_rp2354_20x20_v0p3` (identical layouts). Not applied here; see the
   PR discussion.
