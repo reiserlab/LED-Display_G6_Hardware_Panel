@@ -15,7 +15,8 @@ LED footprints and all other parts are unchanged.
 | LED_T3 | IR | **red** | C2852592 |
 
 Changed the `LCSC Part #` field on the 200 `LED_T2`/`LED_T3` symbols in `panel_led.kicad_sch` and on their PCB
-footprints. No net or layout change. **Firmware:** red = channels 0 and 3 (`sch_col % 4 ∈ {0,3}`), IR = channels 1
+footprints. No net or layout change. The bottom silkscreen legend was updated to match (`0|3: APHHS1005SURCK`,
+`1|2: IN-S42CTQIR`, `R: 22|47Ω`; was `0|2`, `1|3`, `R: 100Ω ±1%`). **Firmware:** red = channels 0 and 3 (`sch_col % 4 ∈ {0,3}`), IR = channels 1
 and 2; `panel_test.py led 0|3` drives red (was `0|2` on v0.4r1).
 
 ## 2. Column resistors R9–R28
@@ -37,12 +38,15 @@ Operating points from the analysis-doc model (5 V, 1.3 Ω source, 0.55 Ω sink s
 | | red 22 Ω | IR 47 Ω |
 |---|---|---|
 | own colour only: I, resistor power | 87 mA, 151 mW (75 %) | 64 mA, 176 mW (88 %) |
-| red + IR all on: I | 80 mA | 59 mA |
+| red + IR all on: I | 79 mA | 57 mA |
 | vs v0.4r1 (100 Ω) | ×3.1 | ×1.9 |
 | LED rating used | 47 % of 185 mA peak (1/10 duty, ≤0.1 ms — our 45 µs / 4.5 % qualifies); 30 mA DC | 500 mA peak is specified only for ≤1 % duty; 70 mA DC; average here is 3 mA |
 
-Row current all-on 1.29 A → row-sink drop 0.71 V (red falls ≈8 % when the IR bank is also lit) and ≈0.65 V droop of
-the 5 V rail across the 45 µs pulse with the existing 18 × 10 µF (no room for more bulk capacitance, see §5).
+Row current all-on 1.36 A → row-sink drop 0.75 V (red falls ≈10 % when the IR bank is also lit) and ≈0.68 V droop of
+the 5 V rail across the 45 µs pulse with the existing 18 × 10 µF (no room for more bulk capacitance, see §5). A 5.0 V
+rail therefore sags to ≈4.3 V at the end of an all-on pulse, below the UCC27517's 4.5 V minimum recommended VDD and
+approaching its UVLO (4.2 V typ on, 3.9 V off); on a 4.75 V USB-class supply it would cross it. **Bench-verify VDD at
+the driver pins under full-field load before committing to these values.**
 Sensitivity: the red resistor power depends on the LED's dynamic resistance, which the datasheet gives only to
 30 mA; at 4 Ω instead of 8 Ω the 22 Ω part would run at 90 %. **Before ordering, pulse one loose Kingbright LED at
 80–100 mA and check V_F; if it is below ≈2.5 V at 90 mA, use 27 Ω (Vishay RCS040227R0FKED, C2100055, 6 536 in stock;
@@ -53,8 +57,8 @@ parts must not be substituted. The only 0402 rated above 0.2 W in stock (KOA SG7
 part that does not fit this land pattern.
 
 **Supply current:** with one row active at a time for 45 of every 50 µs, the panel's 5 V current is 0.9 × the row
-current, i.e. ≈1.16 A average (1.29 A pulses, ≈1.22 A RMS) for a full-field red+IR pattern at duty 255; ≈0.78 A
-red-only, ≈0.58 A IR-only; v0.4r1 was ≈0.52 A all-on. The "≈50 mA" in the analysis doc multiplied the row current by
+current, i.e. ≈1.22 A average (1.36 A pulses, ≈1.29 A RMS) for a full-field red+IR pattern at duty 255; ≈0.78 A
+red-only, ≈0.58 A IR-only; v0.4r1 was ≈0.53 A all-on. The "≈50 mA" in the analysis doc multiplied the row current by
 the per-LED duty and is wrong by ×20; the 5 V entry and the inter-panel bus must be checked against these numbers.
 
 ## 3. Layout
@@ -153,8 +157,8 @@ At the project's own rules (0.125 mm) the copper DRC is clean apart from the cou
 - **Bulk capacitance (spec change 4, optional):** no room. With courtyards padded by 0.15 mm and tracks by
   0.2 mm there is no free bottom-side area for a 1206 or 0805 within 4 mm of any column driver U3–U22; the only
   1206-sized free area on the bottom side is at ≈(76.7, 64.0), 8 mm from U22, fitting one part. Adding 2–4 ×
-  22–47 µF therefore needs parts moved and is left for a layout revision; expect ≈0.6 V droop on the 45 µs
-  all-on pulse (1.15 A) with the existing 18 × 10 µF, per the analysis.
+  22–47 µF therefore needs parts moved and is left for a layout revision; expect ≈0.68 V droop on the 45 µs
+  all-on pulse (1.36 A) with the existing 18 × 10 µF.
 - **Other variants:** the layout part of this change (`tools/column_resistors_0402/`) applies unchanged to
   `panel_rp2354_20x20_four-color_v0p4` and `panel_rp2354_20x20_v0p3` (identical layouts). Not applied here; see the
   PR discussion.
