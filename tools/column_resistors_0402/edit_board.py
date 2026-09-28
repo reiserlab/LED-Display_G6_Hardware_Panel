@@ -26,7 +26,9 @@ bb = board.GetBoardEdgesBoundingBox(); EDGE_L, EDGE_R, EDGE_T, EDGE_B = bb.GetLe
 n = {}
 for fp in board.GetFootprints():
     if fp.GetValue() in LCSC_LED:
-        field(fp, 'LCSC Part #').SetText(LCSC_LED[fp.GetValue()]); n[fp.GetValue()] = n.get(fp.GetValue(), 0) + 1
+        fld = field(fp, 'LCSC Part #')
+        if fld is None: raise RuntimeError(f"{fp.GetReference()} ({fp.GetValue()}) has no 'LCSC Part #' field")
+        fld.SetText(LCSC_LED[fp.GetValue()]); n[fp.GetValue()] = n.get(fp.GetValue(), 0) + 1
 log.append(f"LED LCSC swapped: {n}")
 
 # ---------- 2. footprint swap R9-R28 ----------
