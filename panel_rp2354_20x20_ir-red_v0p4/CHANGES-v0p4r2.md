@@ -104,8 +104,9 @@ R_OL roughly cancels):
 matched):** during scanning the UCC27517s are not a heat source at any revision (RMS 0.13–0.16 A, average ≈30 mA,
 junction +3–5 °C; column drivers 10–14 mW). The 45 µs / 0.6–0.9 A waveform is nevertheless **outside the datasheet's
 specified envelope** (0.3 A continuous, 4 A for 0.5 µs); the physics says thermal and current-density margins are
-large, but that should be confirmed on hardware, not asserted. Shortening the row pulse does not help: for the same
-light the peak current rises in proportion and I²·t heating gets worse. The residual driver risks are not steady
+large, but that should be confirmed on hardware, not asserted. Shortening the row pulse changes nothing about the
+peak current (set by the resistors); it only lowers duty, so the panel gets dimmer and the drivers run proportionally
+cooler. There is no regime to reach: the 0.5 µs / 4 A rating describes gate-charge bursts, not a safer operating mode. The residual driver risks are not steady
 heating but:
 
 1. **A held-on row** (0.34–0.47 W → 100–130 °C junction at 25 °C ambient, >140 °C at 40 °C; red LEDs at 46 mA DC vs a
