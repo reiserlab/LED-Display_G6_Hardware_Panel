@@ -10,11 +10,20 @@ board=pcbnew.LoadBoard(sys.argv[1]); mode=sys.argv[2]; dump='--dump' in sys.argv
 B=pcbnew.B_Cu; mm=1e-6
 refs=[f'R{i}' for i in range(9,29)]
 tracks=[t for t in board.GetTracks()]
+def _point_seg_dist(p, a, b):
+    ax,ay=a.x,a.y; bx,by=b.x,b.y; px,py=p.x,p.y
+    dx,dy=bx-ax,by-ay
+    if dx==0 and dy==0: return ((px-ax)**2+(py-ay)**2)**0.5
+    t=max(0.0,min(1.0,((px-ax)*dx+(py-ay)*dy)/(dx*dx+dy*dy)))
+    return ((px-(ax+t*dx))**2+(py-(ay+t*dy))**2)**0.5
 def near(center, r):
     out=[]
     for t in tracks:
-        if t.GetClass()=='PCB_VIA' or t.GetLayer()==B:
-            if (t.GetPosition()-center).EuclideanNorm()<r*1e6 or (t.GetClass()!='PCB_VIA' and (t.GetEnd()-center).EuclideanNorm()<r*1e6):
+        if t.GetClass()=='PCB_VIA':
+            if (t.GetPosition()-center).EuclideanNorm()<r*1e6:
+                out.append(t)
+        elif t.GetLayer()==B:
+            if _point_seg_dist(center, t.GetStart(), t.GetEnd())<r*1e6:
                 out.append(t)
     return out
 def fpads(center,r,exclude):
