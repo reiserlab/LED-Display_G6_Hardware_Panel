@@ -66,7 +66,7 @@ Standard 1/16 W 0402 parts must not be substituted. Not in stock at any brand on
 The UCC27517 output is rated 0.3 A continuous and 4 A only for 0.5 µs pulses (absolute maxima); a 45 µs row pulse is
 in neither column of that table, so the question is what physically limits the part. It is a MOSFET output stage with
 no pulse-specific mechanism: the limit is I²·R heating of the output FET (junction ≤150 °C; R_θJA 217.6 °C/W for the
-SOT-23-5) and, for DC, metallisation. Two corrections to the circuit model used above:
+SOT-23-5) and, for DC, metallisation — with the caveat that TI does not characterise intermediate pulse widths, see below. Two corrections to the circuit model used above:
 
 - **Column drivers source through the P-MOS pull-up: R_OH = 5 Ω typ / 11 Ω max at 4.5 V** (datasheet §9.3.5: the
   N-MOS boost that gives the 4 A peak is on only during the switching edge). The analysis doc's 1.3 Ω "1.4 × R_OL"
@@ -88,14 +88,56 @@ over 90× the time, and heat diffuses ≈60 µm in silicon in 45 µs, so the tra
 v0.3 (160 Ω green, 0.33 A rows) dissipates 3 mW per row driver, v0.4r1 (100 Ω) 8.5 mW; the rejected 22/47 Ω point
 would have been 41–47 mW (+9–10 °C) — still fine in scanning, but 0.9–1.0 W (+200 °C) if a row stalled.
 
-**Conclusion:** during scanning the drivers are not a heat source at any revision (RMS 0.16 A < 0.3 A, average 34 mA,
-junction +3–5 °C). Shortening the row pulse does not help: for the same light the peak current rises in proportion and
-I²·t heating gets worse. The exposure is a **held-on row**: at v0.4r2 currents the row driver reaches 100–130 °C
-junction in a 25 °C room and exceeds 140 °C at 40 °C ambient; the LEDs (red 46 mA DC vs 30 mA rating) and, on v0.4r1,
-the 0201 resistors (78–110 mW vs 50 mW) also overload. The firmware bounds this: the row PIO state machine turns the row
-off after its own delay count regardless of the CPU (`display_scan_twopio.cpp`), and a 2 ms per-row completion timeout
-fails dark. Worth adding: a hard cap on the PIO delay count (≤100 µs) and the RP2350 hardware watchdog so a CPU hang
-reboots into all-off.
+Worst-case corners for v0.4r2 (all 20 LEDs of the row on; row-driver heating is ∝ I²·R_OL so lower current at higher
+R_OL roughly cancels):
+
+| corner | red / IR LED | row pulse | row driver avg → ΔTj | stalled row |
+|---|---|---|---|---|
+| typical parts, 5.0 V | 46 / 30 mA | 0.76 A | 15 mW → +3.4 °C | 0.34 W → +75 °C |
+| typical parts, 4.5 V | 39 / 26 mA | 0.64 A | 11 mW → +2.4 °C | 0.25 W → +54 °C |
+| datasheet-max driver R (11 / 1.2 Ω), 4.5 V | 31 / 22 mA | 0.53 A | 15 mW → +3.4 °C | 0.34 W → +75 °C |
+| low-V_F LED batch (1.65 / 1.20 V), 5.0 V | 48 / 31 mA | 0.79 A | 17 mW → +3.6 °C | 0.37 W → +81 °C |
+| low-V_F batch + cold drivers (4.1 / 0.43 Ω) | 51 / 32 mA | 0.83 A | 13 mW → +2.9 °C | 0.29 W → +64 °C |
+| extreme (1.55 / 1.10 V, 5.25 V rail) | 58 / 35 mA | 0.93 A | 17 mW → +3.6 °C | 0.37 W → +81 °C |
+
+**Conclusion (after an independent GPT-5.5 numbers check and adversarial review, 2026-09-28; all re-derived values
+matched):** during scanning the UCC27517s are not a heat source at any revision (RMS 0.13–0.16 A, average ≈30 mA,
+junction +3–5 °C; column drivers 10–14 mW). The 45 µs / 0.6–0.9 A waveform is nevertheless **outside the datasheet's
+specified envelope** (0.3 A continuous, 4 A for 0.5 µs); the physics says thermal and current-density margins are
+large, but that should be confirmed on hardware, not asserted. Shortening the row pulse does not help: for the same
+light the peak current rises in proportion and I²·t heating gets worse. The residual driver risks are not steady
+heating but:
+
+1. **A held-on row** (0.34–0.47 W → 100–130 °C junction at 25 °C ambient, >140 °C at 40 °C; red LEDs at 46 mA DC vs a
+   30 mA rating; on v0.4r1 the 0201 resistors at 78–110 mW). Firmware bounds it: the row PIO state machine turns the row
+   off after its own delay count even if the CPU dies (`display_scan_twopio.cpp`), and a 2 ms per-row completion
+   timeout fails dark. Still missing: a hard cap on the PIO delay word (≤100 µs) and the RP2350 hardware watchdog.
+2. **Ground-bounce oscillation** — the datasheet (§9.3.3) warns that high output dI/dt through the single GND pin can
+   re-trigger the input and cause damaging high-frequency oscillation. We switch 0.6–0.9 A with 7–16 ns edges. Scope
+   test required; remedy is the datasheet's 1 nF input-to-GND capacitor at the driver.
+3. **UVLO polarity** — in UVLO the driver forces OUT low, which for a *row* driver means row ON. A local brown-out of the
+   row-driver cluster while columns still drive turns all rows on; this is self-limiting (≈50 mA per row driver through
+   the column resistors) but collapses the rail. V_OFF max is 4.35 V; keep VDD at the driver pins above 4.5 V.
+4. **LED reverse bias** — rows OFF = HIGH puts ≈5 V reverse across off LEDs, at both LEDs' 5 V V_R maximum. Not new to
+   v0.4r2; reverse current should be measured, and rail overshoot kept small.
+
+The v0.3 failures Frank mentions cannot be steady driver heating (≈3 mW per row driver, +14–23 °C even stalled). More
+plausible: a row held during bring-up before the per-row timeout existed, oscillation, ESD, or a rail event. Knowing
+which part failed (driver vs resistor vs LED, row vs column) would decide it — a stalled row on v0.4r1 kills a 0201
+resistor first and shows as a dead column.
+
+**Bench validation before a larger order** (first articles, 5.0 V at the panel, full-field red+IR at duty 255,
+10–15 min soak, then IR-only and red-only):
+
+| measurement | expected if the analysis is right | fail |
+|---|---|---|
+| thermal camera on the bottom side | drivers ≤ +5–8 °C above the local board, indistinguishable from neighbours; the 0402 column resistors are the only hot spots (≈ +25–40 °C at 100–115 mW) | any driver > +15 °C above board, still rising, or one row/column driver hotter than its peers |
+| thermal camera, deliberately stalled row (test firmware, low-V_F-safe: duty limited so red ≤ 30 mA, or 5 s max) | that row's driver rises tens of °C within seconds (0.34–0.47 W predicted) | — (this is the calibration of the camera's sensitivity, and confirms the firmware fail-dark restores it) |
+| current probe on the 5 V feed | 0.76 A pulses × 45 µs at 1 ms period, ≈0.72 A average; no row longer than 50 µs | rows > 0.9 A, any pulse > 100 µs, multi-row overlap |
+| scope: row OUT low and column OUT high at the pins | row-low ≈0.35–0.75 V, column-high dropout ≈0.2–0.5 V (checks the R_OL / R_OH extrapolation) | drops far above these, or nonlinear collapse |
+| scope: VDD–GND at a far row driver during the pulse | ≥ 4.5 V throughout | dips toward 4.35 V (UVLO max) |
+| scope: IN+ and OUT vs local GND on a hot row driver, 1 ns/div edges | one clean edge per commanded transition, input margin > 0.5 V | re-triggering / HF bursts → fit the 1 nF input cap |
+| reverse-bias: rows HIGH, columns LOW | µA-scale reverse current, LED reverse voltage ≤ 5 V incl. overshoot | mA-scale reverse current |
 
 ## 3. Layout
 
