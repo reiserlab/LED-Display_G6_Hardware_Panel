@@ -40,7 +40,7 @@ Operating points from the analysis-doc model (5 V, 1.3 Ω source, 0.55 Ω sink s
 
 | | red 47 Ω | IR 100 Ω |
 |---|---|---|
-| own colour only: I, resistor power | 52 mA, 114 mW (57 %) | 33 mA, 100 mW (50 %) |
+| own colour only: I, resistor power (1.3 Ω source model; with the datasheet's 5 Ω pull-up, see below: 48 / 31 mA) | 52 mA, 114 mW (57 %) | 33 mA, 100 mW (50 %) |
 | red + IR all on: I | 49 mA | 31 mA |
 | vs v0.4r1 (100 Ω 0201) | ×2.0 current | ×1.0 (unchanged), resistor now at 50 % instead of 198 % |
 | LED rating used | 28 % of the 185 mA pulse rating; 30 mA DC | 47 % of 70 mA DC; 500 mA pulse |
@@ -60,6 +60,42 @@ Alternatives at the same ≈0.72 A budget: 68 Ω / 68 Ω (red ×1.5, IR ×1.5, 4
 modelled: 33/100 Ω (0.84 A, red ×2.5), 27/100 Ω (0.92 A, red ×2.9), 22/47 Ω (1.22 A, red ×3.3, IR ×2.0 — rejected).
 Standard 1/16 W 0402 parts must not be substituted. Not in stock at any brand on 2026-09-26: 18, 24, 30, 39, 43, 51,
 56, 62 Ω (0.2 W 0402 ±1 %).
+
+### Driver current (UCC27517) — added 2026-09-28 after review
+
+The UCC27517 output is rated 0.3 A continuous and 4 A only for 0.5 µs pulses (absolute maxima); a 45 µs row pulse is
+in neither column of that table, so the question is what physically limits the part. It is a MOSFET output stage with
+no pulse-specific mechanism: the limit is I²·R heating of the output FET (junction ≤150 °C; R_θJA 217.6 °C/W for the
+SOT-23-5) and, for DC, metallisation. Two corrections to the circuit model used above:
+
+- **Column drivers source through the P-MOS pull-up: R_OH = 5 Ω typ / 11 Ω max at 4.5 V** (datasheet §9.3.5: the
+  N-MOS boost that gives the 4 A peak is on only during the switching edge). The analysis doc's 1.3 Ω "1.4 × R_OL"
+  applies to that edge, not to a 45 µs pulse.
+- **Row drivers sink through the N-MOS: R_OL = 0.6 Ω typ / 1.2 Ω max at 4.5 V**, 0.43 → 0.78 Ω from −40 to 140 °C.
+
+| v0.4r2, 47 Ω / 100 Ω, all 20 LEDs of the row on | typ (5 Ω / 0.6 Ω) | datasheet max (11 Ω / 1.2 Ω) |
+|---|---|---|
+| LED current red / IR | 46 / 30 mA | 37 / 26 mA |
+| row pulse (45 µs of 50 µs) | 0.76 A | 0.63 A |
+| row driver: RMS / average current | 0.16 A / 34 mA | 0.13 A / 28 mA |
+| row driver: average power → junction rise | 15 mW → +3.4 °C | 21 mW → +4.6 °C |
+| row driver: energy per pulse → transient rise | 15 µJ → ≈1 °C | 21 µJ → ≈1–2 °C |
+| column driver (its LED lit in every row, 90 %) | 9.5 mW → +2 °C | 14 mW → +3 °C |
+| **stalled scan** (one row held on, all columns on) | **0.34 W → +75 °C** | **0.47 W → +103 °C** |
+
+For comparison the rated 0.5 µs, 4 A pulse deposits ≈5 µJ; our pulse deposits 3–4× that energy but at 1/50 the power
+over 90× the time, and heat diffuses ≈60 µm in silicon in 45 µs, so the transient rise stays at a degree or two.
+v0.3 (160 Ω green, 0.33 A rows) dissipates 3 mW per row driver, v0.4r1 (100 Ω) 8.5 mW; the rejected 22/47 Ω point
+would have been 41–47 mW (+9–10 °C) — still fine in scanning, but 0.9–1.0 W (+200 °C) if a row stalled.
+
+**Conclusion:** during scanning the drivers are not a heat source at any revision (RMS 0.16 A < 0.3 A, average 34 mA,
+junction +3–5 °C). Shortening the row pulse does not help: for the same light the peak current rises in proportion and
+I²·t heating gets worse. The exposure is a **held-on row**: at v0.4r2 currents the row driver reaches 100–130 °C
+junction in a 25 °C room and exceeds 140 °C at 40 °C ambient; the LEDs (red 46 mA DC vs 30 mA rating) and, on v0.4r1,
+the 0201 resistors (78–110 mW vs 50 mW) also overload. The firmware bounds this: the row PIO state machine turns the row
+off after its own delay count regardless of the CPU (`display_scan_twopio.cpp`), and a 2 ms per-row completion timeout
+fails dark. Worth adding: a hard cap on the PIO delay count (≤100 µs) and the RP2350 hardware watchdog so a CPU hang
+reboots into all-off.
 
 ## 3. Layout
 
