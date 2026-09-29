@@ -40,7 +40,7 @@ Operating points from the analysis-doc model (5 V, 1.3 Ω source, 0.55 Ω sink s
 
 | | red 47 Ω | IR 100 Ω |
 |---|---|---|
-| own colour only: I, resistor power (1.3 Ω source model; with the datasheet's 5 Ω pull-up, see below: 48 / 31 mA) | 52 mA, 114 mW (57 %) | 33 mA, 100 mW (50 %) |
+| own colour only: I, resistor power (1.3 Ω source model; with the datasheet's 5 Ω pull-up, see below: 49 / 32 mA) | 52 mA, 114 mW (57 %) | 33 mA, 100 mW (50 %) |
 | red + IR all on: I | 49 mA | 31 mA |
 | vs v0.4r1 (100 Ω 0201) | ×2.0 current | ×1.0 (unchanged), resistor now at 50 % instead of 198 % |
 | LED rating used | 28 % of the 185 mA pulse rating; 30 mA DC | 47 % of 70 mA DC; 500 mA pulse |
