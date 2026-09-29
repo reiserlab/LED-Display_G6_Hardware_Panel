@@ -48,6 +48,15 @@ This doc records which options were actually chosen, why, and what deviated from
 - The doc recommended building **12 panels** (9 for a 3x3 display + 3 spares/qualification). The actual pilot order is **5 panels**, matching the JLC minimum. This was a deliberate measure-first choice: the main risk identified was insufficient brightness (especially red), so the team preferred to qualify a small batch and decide on resistor/current changes before committing more of the ~3,040-3,050 red/IR LEDs already purchased (material for up to 15 panels).
 - As with the four-color panel, higher current with heat-sinking was discussed as a possible follow-up if the pilot proves too dim, not as part of this order.
 
+### Revision v0.4r2 (2026-09-26, PR reiserlab/LED-Display_G6_Hardware_Panel#1)
+
+Two things were found after the pilot order and are corrected in `panel_rp2354_20x20_ir-red_v0p4` v0.4r2:
+
+- **The v0.4r1 BOM as ordered had red on `T0`+`T2` and IR on `T1`+`T3`** (vertical red/IR stripes, even columns red), not the `T0`/`T3` red checkerboard in the table above. v0.4r2 swaps the `T2`/`T3` LCSC fields so red is on `T0`+`T3` and IR on `T1`+`T2` (checkerboard). Firmware channel = bank index: on v0.4r2 red = channels 0 and 3, IR = channels 1 and 2 (`panel_test.py led 0|3`).
+- **The 0201 column resistors were over rating.** A column resistor conducts whenever any lit LED of its column is in the active row, i.e. up to 90 % of the frame for a full-field pattern, so it dissipates about 20× the LED's average power; the 100 Ω 0201 parts ran at 128–198 % of their 50 mW rating. v0.4r2 changes R9–R28 to 0402 0.2 W "high-power" parts: red banks 47 Ω (ROHM `ESR01MZPF47R0`, `C5736551`), IR banks 100 Ω (Panasonic `ERJ-PA2F1000X`, `C427235`). Red current about doubles (≈50 mA per LED while its row is active, 28 % of the LED's 185 mA pulse rating); IR is unchanged at ≈33 mA. Resistors run at 57 % / 50 % of rating. Higher-current options (down to 22 Ω red / 47 Ω IR, ≈3× red) were modelled and rejected: they pull ≈1.2 A per panel from 5 V and droop the rail below the drivers' 4.5 V minimum.
+- **Panel supply current** for a full-field pattern is 0.9 × the row current (one row is on 45 µs of every 50 µs): ≈0.72 A average per panel at v0.4r2 values (0.80 A pulses), ≈0.53 A on v0.4r1. Earlier notes quoting ≈50 mA multiplied by the per-LED duty and are wrong. 5 V enters through the 4-pin JST SH (≈1 A per contact) and is bussed on one pin per inter-panel header; check the arena's power distribution before daisy-chaining many panels at full field.
+- Layout: the 0402 pads needed nine resistors nudged by 0.03–0.20 mm, ten vias moved and six short track re-routes; no driver or other part moved. Details, before/after clearance tables and the DRC report: `panel_rp2354_20x20_ir-red_v0p4/CHANGES-v0p4r2.md` and `production/v0p4r2/`.
+
 ## Combined pilot order
 
 15 four-color panels + 5 Red+IR panels, both assembled via JLCPCB from consigned DigiKey Marketplace reels. The $430 order (plus an additional ~$70 fab charge for undersized vias) covers PCB fabrication and assembly only; the LED components were already paid for and consigned separately in the earlier reel orders.
@@ -55,7 +64,8 @@ This doc records which options were actually chosen, why, and what deviated from
 ## Open items
 
 - [ ] Measure the assembled four-color panel's violet `Vf` bin and confirm/adjust the 68 Ω resistor (82.5 Ω or 56 Ω per the bin table in Appendix A).
-- [ ] Bench-verify the 100 Ω IR current-limit resistor for the Inolux `IN-S42CTQIR` substitution; the value is currently a datasheet calculation only.
+- [ ] Bench-verify the 100 Ω IR current-limit resistor for the Inolux `IN-S42CTQIR` substitution; the value is currently a datasheet calculation only (v0.4r2 keeps 100 Ω, now a 0.2 W 0402 part).
+- [ ] v0.4r2 first articles: measure panel 5 V current and driver VDD droop at full field, confirm red on channels 0/3 and IR on 1/2 optically, inspect the tight resistor sites R14/U8, R15/U9, R17/U11, R22/U16 (0.14–0.18 mm body gap).
 - [ ] Run the first-panel electrical/optical qualification steps summarized in Appendix A and Appendix B (sparse-pixel and full-row current, rail droop, spectra/photon irradiance at the fly position, red/IR visibility limits).
 - [ ] Decide, based on pilot brightness measurements, whether a follow-up batch should push higher current with heat-sinking, using the remaining LEDs from the already-purchased reels.
 - [ ] If a larger four-color order is placed later, follow up with Guangdong Yongyu Optoelectronics on their offer to bin the LEDs by `Vf`/wavelength.
