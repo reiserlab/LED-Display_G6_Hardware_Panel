@@ -1,10 +1,5 @@
----
-title: "Four-color and Red+IR G6 panels: components and order decisions"
-tags: [hardware, LED, G6, violet, blue, green, yellow, orange, red, infrared, checkerboard, procurement]
-status: pilot order placed (15 four-color, 5 Red+IR panels); assembled-panel qualification pending
----
 
-# Four-color and Red+IR G6 panels
+# Four-color and Red+IR G6 panels: components and order decisions
 
 Two new G6 panel variants populate the existing four independently current-limited color banks (`T0`-`T3`) with alternate LEDs. Neither requires LED-net rerouting, a driver-count change, a mapping-table change, or a firmware fork; both still need the normal 400-pixel mapping and polarity test.
 
