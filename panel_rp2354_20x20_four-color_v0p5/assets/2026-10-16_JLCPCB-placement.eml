@@ -1,0 +1,447 @@
+Received: from SA1PR16MB7025.namprd16.prod.outlook.com (2603:10b6:806:4b6::17)
+ by MN2PR16MB2927.namprd16.prod.outlook.com with HTTPS; Fri, 16 Oct 2026
+ 12:02:07 +0000
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=fail;
+ b=ncusJUjsryE0mtkEB6blgLYE6fMbsqkWmEriRmIhAof+EPQo0cpamr8+xtm0HekeCeWln/dU6nnkpmEDZHbSnpTRVCtguc4ehTn9J3WkPP1dZUt3VfRLnBDdenPuRk07kbCflPTb6jLaquj8MTQeaKuepbL584ZBrzlP4cWE1dS8Zrs/Qx6v7cnDdhlrWoq2CmaBkZAYjeIFRk/hIW2dRXKwDra5K7CwTOeNNybCJ8ETID7OO/6n5Us9orJgIQcMwH+yQwq4wMVJRqP2WWGzT3O8m6F0nuNH0zMNkYF7dqltLWVvCFlqvg4BrYwm94/oEddRQm85SiYjz0A1m1ed6w==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=CAb3zaE5Mae/KXLlXcxTiRxMteBcSt55p4u9Z7GQmiI=;
+ b=LIxo+Mn4J0UrPQpVrBQZHD/ktKHgh1SqYANVlY0lDKrrppJUOBP/f8D6XhVfSW8RcdVf6Ti5er/xnbxkdKYuWltr1c641SSuyOv17JF00tLmPIg+vEuOwqWZgvY1JjVJOXglZV1MB8NlY/Gf1LcfCS6f0C4UAG5uBtJDmnARQITcZukhJl+h4o9ki3VP8EayN5DcaCr4q/pvphv2aJCjlQburRdxUbR6qaEcOD1xymIlOde1TzY6uPCOcHgosOvzkSHYU8Wa9yoTH0XNNUq67dYiD9jrWB9jLq7kca5OpBZg6s8diYT+dn311EIQV4U7DYqp+AlprMMmopVUtleuKg==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=softfail (sender ip
+ is 148.163.144.206) smtp.rcpttodomain=janelia.hhmi.org
+ smtp.mailfrom=jlcpcb.com; dmarc=fail (p=none sp=none pct=100) action=none
+ header.from=jlcpcb.com; dkim=fail (body hash did not verify)
+ header.d=jlcpcb.com; arc=fail (47)
+Received: from MW4PR03CA0250.namprd03.prod.outlook.com (2603:10b6:303:b4::15)
+ by SA1PR16MB7025.namprd16.prod.outlook.com (2603:10b6:806:4b6::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.522.15; Fri, 16 Oct
+ 2026 12:02:06 +0000
+Received: from CO1PEPF00012E64.namprd05.prod.outlook.com
+ (2603:10b6:303:b4:cafe::e) by MW4PR03CA0250.outlook.office365.com
+ (2603:10b6:303:b4::15) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.496.5 via Frontend Transport; Fri, 16
+ Oct 2026 12:02:05 +0000
+Authentication-Results: mx.microsoft.com 1; spf=softfail (sender IP is
+ 148.163.144.206) smtp.mailfrom=jlcpcb.com; dkim=fail (body hash did not
+ verify) header.d=jlcpcb.com;dmarc=fail action=none
+ header.from=jlcpcb.com;compauth=none reason=405
+Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
+ jlcpcb.com discourages use of 148.163.144.206 as permitted sender)
+Received: from mx0a-0018cc01.pphosted.com (148.163.144.206) by
+ CO1PEPF00012E64.mail.protection.outlook.com (10.167.249.73) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.522.6
+ via Frontend Transport; Fri, 16 Oct 2026 12:02:05 +0000
+Received: from pps.filterd (m0165002.ppops.net [127.0.0.1])
+	by mx0a-0018cc01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69G63ZSv2990625
+	for <loeschef@janelia.hhmi.org>; Fri, 16 Oct 2026 08:02:05 -0400
+Authentication-Results-Original: ppops.net;	spf=pass
+ smtp.mailfrom=lorraine@jlcpcb.com;	dkim=pass header.s=google
+ header.d=jlcpcb.com;	dmarc=pass header.from=jlcpcb.com
+Received: from mail-ot1-f44.google.com (mail-ot1-f44.google.com [209.85.210.44])
+	by mx0a-0018cc01.pphosted.com (PPS) with ESMTPS id 4h7fp0tjej-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <loeschef@janelia.hhmi.org>; Fri, 16 Oct 2026 08:02:02 -0400 (EDT)
+Received: by mail-ot1-f44.google.com with SMTP id 46e09a7af769-843cf077f10so260060a34.1
+        for <loeschef@janelia.hhmi.org>; Fri, 16 Oct 2026 05:02:02 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1792152122; cv=none;
+        d=google.com; s=arc-20260327;
+        b=M61q4rOexG+7WGSkwVWOuciHJ/SIpyuXlyKAYfapRvphR20Z9eMqaSpw41i/3npqlU
+         ju6p3H7ObbJTN0u3iSaLWp2o14Oab8ehdPnONnD0Cu9o+K4AfYIGQY4sswpgFjIsn83h
+         KVoKBBsEyAP+654GVLtNFFGDAl25DlqYJXWHffXb43hVoeEKdl6cqUMoSlqBn1NK6M+m
+         T7F1lpvdeaiOC5X727eb9U+0rBes1zFBW75xtjEMs7tIeeHikO7aizap7dP3qzu1xZ6S
+         P/Qb97xYFCjvfVhgwRkZJAfkz7KTuOwLSLIw8XHgHfRnmyP6QKDwdqjfQvmAfuDyUJEC
+         fftQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=to:subject:message-id:date:mime-version:sender:from:dkim-signature;
+        bh=TIb5v6Pxq645AcN8a3ctrh+NScOKJZARoIQ2Lbix11c=;
+        fh=IoBNdObt+6dW21tfv/TFNM+oUopxly8GtmGxCv7AXA8=;
+        b=aLt8kuO5+Rf8ZAHB9bfzHFNUKLsMXhJ6ZY6zTu2tKYpurkbDEgFT3VZ8USNzf2aPPu
+         ES/o/hv5VzCbvtNtzJZA9mTyJG95EWvfnTvH6uV3WWCkEmVtQm7mDMgzi0n+mAMWjVr2
+         IEWZ12/EkzZCWPbtP3m1cSUSmDcgYVio/6SW+WZVcMWzdjY8gRRs5CF/ipzoXT+NaVxy
+         XzUBRA9d4Cj02LPLeo/LCkalfwWx6GAtFXwaJEol9X6oo4XyibCAmdMJFglHmd+PrLcn
+         81yvJbeY1OD0VyJpZdC7GyYdlGVImYgPseRR4nansWkGw7SF8FFHHqFu+RGwOFPj9nVe
+         KlMQ==;
+        darn=janelia.hhmi.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=jlcpcb.com; s=google; t=1792152122; x=1792756922; darn=janelia.hhmi.org;
+        h=content-type:to:subject:message-id:date:mime-version:sender:from
+         :from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=TIb5v6Pxq645AcN8a3ctrh+NScOKJZARoIQ2Lbix11c=;
+        b=FvWTkeGNdwqrabSQWvTUeg25vJqltr7SD51bZZxuJsRDfmsnqjBiWoT9TenaLLgbtz
+         gZFzX3vs9HUvThi6z9hoFSd/Afx/mXp0zFWLIpkfjZ7t0Mq2JT5slSqGBiJFuCbr4o3s
+         DRVUdKoCnBXKomZ7I6Lvhk6e49yxsFGvw/LQTp6p1GrLAOEQo287ugXSqzB3szqXr/hm
+         24lHP2GU7nk5AAEPvfBA+KtUf+zSJx5pDNJz/41mX8xsgHy07Nstx+oGxDP2Zbxc9SzN
+         aIYCnewxx32Jtvppa3ZuaLAZku1g1VwEYQPK9fZvqOYgSbR5K1OBGr5Boe+LkkydX7QK
+         5THw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792152122; x=1792756922;
+        h=content-type:to:subject:message-id:date:mime-version:sender:from
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=TIb5v6Pxq645AcN8a3ctrh+NScOKJZARoIQ2Lbix11c=;
+        b=Kpv0CVMhFvfnLtuPK17d0Bo9xBshBQ6IbPuzgKIqH5Ot09IKCkb8lo3Ny/ill3ixJK
+         mmqohdCGo/IydjPJOXsZXKgTGi47Ejv2jnHqMqt3xYU7wd7c6/jPoG32QexfMZQcihpH
+         QrCvpQTt4906RpsjEwtRqFhKEuwzxep0KZpO/IYvM58MMkNPwLl+OZKJwmfHqNP3kHoU
+         ul0plg5zrjRMJy58+uk++Lk86rX/5tdkvmzAcm2Jl0hvcbPO7JUSpCKtcyroo9MCU9G4
+         ef1PpjibctEZKDmRbVMrFINJuZxx8WcOPqn/gfE2Q9on8qa9SOExw9ib8OlIzG6sVgNJ
+         WFOA==
+X-Gm-Message-State: AFq9FYLHoA6QLhk+nR5OLyYNggwnLOOqpFMdbZ4TX07fuKUBFPPh+G3F
+	+dmipuaj0F5Yv9lJ8rvajQUjYIzktZmFX8ee/InpdtDikvIElTNLEA2twc0deRR/GTkrJGyEIwP
+	4wQILtJYvMxF4W19VyJZldsIkDG94RO05X4tVQWC3+mzG5dWIFqBlhMc=
+X-Gm-Gg: AYBFou2+TkerCh20J7dbUTH+lsPqVsT3juqQFs/ffQpilQmNpOijH4c8Y6vU8Xxw0pj
+	Dj52VTEuX6g3Ch67lH985baw3ZMkG0D4CK/VUQyG3jz2WbNL2RLxNkwc+UmgqhB26shQAeNX6Eo
+	k15cl9fXOo3q9UtmsBp4PvAkNlZbs7cHFNlTQ5fzmkKYDObw4LHtiifj7AcRxFISQWiiJ7fg0+M
+	RgKzPsM8QarmuK4eIu3r0lUqGeuGI+or4w0I+6GzjXD0mdFF0t4/VSvUOXq+3hXo4dvm8G29NmY
+	J9ClH1m5sFv53iGItBZJCkfi1yLFCF5Pr9vomQE3rwZN1R3YhMblm0PpNwMrMLrF/w==
+X-Received: by 2002:a05:6808:13d6:b0:4d6:9283:1dec with SMTP id
+ 5614622812f47-50c5a30c452mr17642254b6e.58.1792152121783; Fri, 16 Oct 2026
+ 05:02:01 -0700 (PDT)
+Received: from 474530442848 named unknown by gmailapi.google.com with
+ HTTPREST; Fri, 16 Oct 2026 05:02:01 -0700
+Received: from 474530442848 named unknown by gmailapi.google.com with
+ HTTPREST; Fri, 16 Oct 2026 05:02:01 -0700
+From: lorraine@jlcpcb.com
+Sender: lorraine@jlcpcb.com
+X-JLC-MSG-ID: 633972605168218113
+X-JLC-THREAD-ID: 633972605168218114
+X-JLC-THREAD-ACCESS-ID: 5f2b53aa7ffd4d1f900610fc1ca1732c
+X-JLC-BIZ: 3
+Date: Fri, 16 Oct 2026 05:02:01 -0700
+X-Google-Sender-Auth: 7RODyFrs90O4-pmV7ME_s2EhqEk
+X-Gm-Features: AclHuK9Ocw-qG7nKvyf2BEXpdk0eUm6nuW1ePiUPCGwzcaen645Lp2r0Vbm1Itw
+Message-ID: <CAOUhQiJYvbA0rMiUsmgHdGfJ7O5dw106ccFPFFVtcBWkF7bmHA@mail.gmail.com>
+Subject: follow up on parts YY0402RE-RN3S0-T1AR4 (C9900325346)/YY0402YE-RN3S0-T1AR4
+ (C9900325345)
+To: loeschef@janelia.hhmi.org
+Content-Type: multipart/alternative; boundary="0000000000009a4d54065df3ee4e"
+X-Proofpoint-GUID: IBsRpdg_L_oc1SMQLuq1CB6PCL1P4sf1
+X-Proofpoint-ORIG-GUID: IBsRpdg_L_oc1SMQLuq1CB6PCL1P4sf1
+X-CLX-Response: 1TFkXGxoaHxEKTHoXGhEKWUQXbxhhR2JlcBNwZ1sRClhYF2tPQVhgS096ckA
+ cEQp4ThdjfWJNWBtmYll9EhEKeUwXZxpLZExZeEBkY0MRCkNIFwcbEhsRCkNZFwcbHBkRCkNJFx
+ oEGhoaEQpZTRduT0ZDXE9YEQpfWRcbHRMRCl9NF2dmchEKWUkXGnEaEBp3BhsfE3EZEhAadwYYG
+ gYaEQpZXhdsbHkRCklGF0JCR0N1QkVZXk9OEQpJRxd4T00RCkNOF2NoWXhaTk11ZnVFSRt5Z3tm
+ X1sbaWgcemlmG3oeWUwbEQpYXBcfBBoEHhgTBRsaBBsaGgQbGR4EGRkQGx4aHxoRCl5ZF0NoHUh
+ yEQpNXBcbExIRCkxaF2hpTU1rEQpFWRdva2sRCkxGF29rY2traxEKQk8XekxDSXNpeQFbQHsRCk
+ NaFxgaEwQSHwQYGxoEHh4RCkJeFxsRCkJcFxsRCl5OFxsRCkJLF2N9Yk1YG2ZiWX0SEQpCSRdjf
+ WJNWBtmYll9EhEKQkUXa09BWGBLT3pyQBwRCkJOF2N9Yk1YG2ZiWX0SEQpCTBdrT0FYYEtPenJA
+ HBEKQmwXa09BWGBLT3pyQBwRCkJAF2RgaUdOQGdia3xMEQpCWBdvE0MaSUkBAW1hYREKTV4XGxE
+ KWlgXHxEKeUMXY3hfHnJpfHp4WFsRCllLFx8dGxoRCnBoF2hBTxJnQXlQQFp/EBkaEQpwaBdpWm
+ hPQH0cWnNsYBAeEhEKcGgXYxJkZHxyQlNSWx4QHx4RCnBoF2hAfhtwfgFLeBNhEB0aEQpwaBd6R
+ hgFYHxhHV9ERBAZGhEKcGgXZk9CemJgYWN6ekYQGRoRCnBoF2RzSR5cbGZiEhwYEBkaEQpwaBdv
+ fGFISx5yHXwSRhASGBEKcH0XawVyQ30BXGseaU4QGxodEQpwfRdlchlEGhhLT21hRhAZGhEKcH0
+ XYkZ9bnl/GhxsaUEQGRoRCnB9F2tfGll6RgFPHEwBEBkaEQpwfRdiXWEdW3MYcwETYhAZGhEKcH
+ 0XaxwcW1AfG015YWMQGxoaEQpwfRdhXmZTQV0bQU59UBAbGhoRCnB9F2FZQXxkZ3JZRG5kEBMfE
+ QpwfRdoW1oFcFNLbE4bXRAbGhoRCnB9F2tpaB8TTEASR314EBISEQpwfRdjf11OZh8FRHx7YxAZ
+ GhEKcH8XelIScmNMWExtZ3wQHxoRCnBfF2JmR114WnsfcFl9EB8YEQpwfxdlbFMdG1JEcx0dZhA
+ bGB4RCnBfF2xkYQVJZkFEXkVuEBsaEhEKcF8XZR9SbWtQTBlseEsQGxoSEQpwXxdgXUBgW31kZV
+ JzbxAbGhoRCnBfF2dCfRhaEmYaS2tLEBMTEQptfhcbEQpYTRdLESA=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE2MDA0NyBTYWx0ZWRfXxx7wS+g6LYg1
+ ZdcJbj+AdzecO4KBoDYo1QJyVPctE1YWlErIQJct4KvoVl10etn0tNQmnuI6WLWU4OKTJ+Wet7F
+ TXcxyTRaDv9/gc1tCW2bBcfYk+RQtBwZSrR9Y6se6DCOwKhb7JANEXpL5lmiKGkCYUu3JYkiCwl
+ agesYiH2f+brh+ogq2WRp3EJyNmHJnr+z7WfKwE5v2SpXVnRoeGTCfEOdiePM17MlmZ1LyFmbyv
+ rq/LWLw0sPE+QY4Sh1nmTeY6S+ZB20r/NnJQC241YpgxF8mKF9s3gzdnOcc6X6/yQ7vFSo/9WcQ
+ 0uv01QCYW70R5SoUUk7/L5F580sK3alSdkmoAkzBTXu1g/137w+1J2P4l8b7YS96n2OJlGR0+vT
+ mUMueI6rRCYOpjVSQBWDizU5ycF7JB8MeNMMPcHTV+hHsIBAqnnQX+OwFuOmsXdUf0aakQ3Dfn4
+ 3pup5ROyrkb2h/NdOjh4hQ7cmbMW+JwFtOXxa4/bvJX5EcPkJ6+fnneHTZP/f
+X-CLX-Shades: Deliver
+X-Authority-Analysis: v=2.4 cv=IvKL47/g c=1 sm=1 tr=0 ts=6ad2123c cx=c_pps
+ a=PnbjpSU/03CrHefOPWZnMg==:117 a=660iZSQnnn4A:10 a=qOA8Brl28YkA:10
+ a=zkTDeJ4nwWgA:10 a=JyWEw40TUO5AK6tc77iI:22 a=hONIHPayVqyUON3Nled3:22
+ a=0uOjcH1uLKufyOPpb6gA:22 a=_iNrgfbsAAAA:20 a=icI7aIJwAAAA:8
+ a=PMoHLmLR5QhIf6QLUdIA:9 a=QEXdDO2ut3YA:10 a=rYFonLNppuovusBj_uoA:9
+ a=4VsbMP4syTCGwSdE:21 a=lqcHg5cX4UMA:10 a=q2Y35EV4xEJNgaYjWwqr:22
+ a=PAgzrUWiWEvxrzyvdlWm:22 a=BYL-pX1xYmNgx-yrYO5N:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE2MDA0NyBTYWx0ZWRfX9AnXr2CxfoLO
+ SJ1x6y7JKnRZR+kr4GFxKKzQYvBUvMVxmRDXG/rDi8wpOd8QwQLQR5Wgly3Mijf/eDPpHGtfdsH
+ Z9h0yAXBpNelsCtXGzOsJpPfJR+obkQ=
+X-Proofpoint-Virus-Version: vendor=nai engine=6900 definitions=11936
+ signatures=596817
+X-Proofpoint-Spam-Details: rule=inbound_notspam policy=inbound score=0
+ spamscore=0 adultscore=0 bulkscore=0 suspectscore=0 clxscore=1005
+ lowpriorityscore=0 priorityscore=0 impostorscore=0 phishscore=0
+ malwarescore=0 classifier=clx:Deliver authscore=0 authtc= authcc=
+ route=internal adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
+ definitions=main-2610160047 domainage_hfrom=5710
+Return-Path: lorraine@jlcpcb.com
+X-MS-Exchange-Organization-ExpirationStartTime: 16 Oct 2026 12:02:05.6659
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id: d07272a6-d955-4df6-f8b7-08df2b7d4c0b
+X-EOPAttributedMessage: 0
+X-EOPTenantAttributedMessage: dd8acbd0-ad85-4eb9-8a76-871027ad4a1b:0
+X-MS-Exchange-Organization-MessageDirectionality: Incoming
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1PEPF00012E64:EE_|SA1PR16MB7025:EE_|MN2PR16MB2927:EE_
+X-MS-Exchange-Organization-AuthSource: CO1PEPF00012E64.namprd05.prod.outlook.com
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-Office365-Filtering-Correlation-Id: d07272a6-d955-4df6-f8b7-08df2b7d4c0b
+X-MS-Exchange-AtpMessageProperties: SA|SL
+X-MS-Exchange-Organization-BypassClutter: true
+X-MS-Exchange-Organization-SCL: -1
+X-Microsoft-Antispam: BCL:0;ARA:13230040|7049299003|3109299003|260918215300599003|260918224100599003|43022699015|69100299015|82310400026|7149299003|5063699009|56012099006|261009223027099003|10067099003|16102099003|55112099003|19002099009|8096899003|13003099007|4133799003|18003699003;
+X-Forefront-Antispam-Report: CIP:148.163.144.206;CTRY:US;LANG:en;SCL:-1;SRV:;IPV:CAL;SFV:SKN;H:mx0a-0018cc01.pphosted.com;PTR:mx0a-0018cc01.pphosted.com;CAT:NONE;SFS:(13230040)(7049299003)(3109299003)(260918215300599003)(260918224100599003)(43022699015)(69100299015)(82310400026)(7149299003)(5063699009)(56012099006)(261009223027099003)(10067099003)(16102099003)(55112099003)(19002099009)(8096899003)(13003099007)(4133799003)(18003699003);DIR:INB;
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Oct 2026 12:02:05.5027
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d07272a6-d955-4df6-f8b7-08df2b7d4c0b
+X-MS-Exchange-CrossTenant-Id: dd8acbd0-ad85-4eb9-8a76-871027ad4a1b
+X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF00012E64.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR16MB7025
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:02.2107129
+X-MS-Exchange-Processed-By-BccFoldering: 15.21.0496.018
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;auth:0;dest:I;ENG:(910005)(944506478)(944626604)(920097)(930201)(20251009284)(140003);
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?MGVIdjRWeXlwVGQ4VVc4a3NlUnhwN0c3QjZlQktXU05tV0RnRkZLUlFCTmps?=
+ =?utf-8?B?WEt2R0lBTHQweGxpYmVYaGZhT1FkcUlVaVBZcXFJNU92aHI3a0dMelZSYkdC?=
+ =?utf-8?B?R0VNL3RKejRzeGI2K2Roejc2WWJnakJpRUdPZGNtWmxCMjZqZFVEUVhHR0RQ?=
+ =?utf-8?B?OEhURUlvc2pzSndERkM2Y1VDcW4rS1NHU0QyZC9qdVFEb0tMdGVIeDdPdG53?=
+ =?utf-8?B?T3BjT1grTmpTbXBxT3pTc0wzekFhd1Fzenk2T2xVbzVXRHR5NE1iWURvZEVU?=
+ =?utf-8?B?TnFDTUpuVU5md29sb0x2d3FCdjBvcmdBWnBrQWxFVFdnVGtIaVMrMDRUaE85?=
+ =?utf-8?B?TDIzcHVucmx5NDBYNXBST3B1R3UvNHNkUVVSWmc2eklVWmtxa29SS1l0emp3?=
+ =?utf-8?B?UHIvSTBDVDFLem95R2lXMmo1QnlUV0doWnZ0ZDRrSWs0enZ4MC9yZzV2L1or?=
+ =?utf-8?B?K3pyMTNITmpNbHBwUHFTcUJ3UWRDQnhvdjYxdU5XVWJTa3JnTnViWFpaM2Nr?=
+ =?utf-8?B?L09kR0lJUTdxYzZVWXB5eE1TQlppWEFYTGpYWmhwNjdIR000NEx4SXROOEd3?=
+ =?utf-8?B?Sm55Sk82L2RBQlFZRzdRK3pBWnRjUUxscnFPUUxLTWRKNTA1OC9tWnFNc1Uv?=
+ =?utf-8?B?ZzJXMCtPZk50S0M2ZlZORFl5eW93WjBUeXlhRDUxWDMxdXJKK0JGYmNZZm1m?=
+ =?utf-8?B?clF5NkZidDBNbHpTdjlOME1hVUdYOHQ0ejlSWk1QZFdodmpGY2JmeFhuZ2N3?=
+ =?utf-8?B?dGlDbUlhcjA2dDNtSHRSQkd6Tm02QS9kNTlhcFl2RElRRVMrSitJbG5NREJk?=
+ =?utf-8?B?MUxZMnUxbDkvbWl1QVJIelhKSTNERkV4R3NTQS9UbkZTQ2laYWVjeThHQWYv?=
+ =?utf-8?B?QlhrazBoT3RqQWNHZlpJNmloOE4yaTBFWlU1MUc4QkNaMDluWXVKSVhINFhh?=
+ =?utf-8?B?Nkx4VlQ5RGZlZ2J0SURWcExtSDZla0swcTF0VisrNjUyVnpWZWhzM2k1VTZN?=
+ =?utf-8?B?Ukc5UzFjSFJZVjI2SyswMFpFNHl5UU8xcTlEamNZYWRXbnVFN2JjWnNoK2Jn?=
+ =?utf-8?B?WkZOaUErYm5BRFNPL3A0THZVYUlPMnAxZzZjOFJnMFArNmZselVtQkhNTCtE?=
+ =?utf-8?B?RTVvWlA0bUFMeGtWL0VOMUhlekhuemZrRDNrdlliQkdxTnNRTzdXZTZveE4x?=
+ =?utf-8?B?NVhGdVZya2xOYVVST0ZQN21XYU1kWHBhUEpoV3VraE82dWNGQzdURGNsa2ZR?=
+ =?utf-8?B?THRFeG93SDFZV2drL0hZN3hqMFNRYVcxQmpaTytyYk9NU1VQdkNLK1NRc0RZ?=
+ =?utf-8?B?NTMwRmxaM241ZzIrSHZhREJpRkx6Qk9TL3FRbGpYdTZHQS84dWJHVDVFYWdM?=
+ =?utf-8?B?SWIxYjlSMEhFTnJ0QVZaczdFQ01SY1ZjV204Wm9wNDBQK0ZnT3p5eEU1MTlJ?=
+ =?utf-8?B?OEpKdEJLZldoQis5am1XS2tQNW1uWlBXV1NEOW16M3licmVnOU5SQXgrTnNm?=
+ =?utf-8?B?ZU90aVFGR0JIWG1sUFBGOW05NG9UVUpEWU5sTWkzWWJUczY2aFNnWnkwODBw?=
+ =?utf-8?B?a2VyTW9hd0RpTFBIbTV4bUtYeGpzZzQ0YVpyclRjYllxbFJnWDVxZHZFdXQ0?=
+ =?utf-8?B?aUpuTklSTUkvbytobEkydlRRVW9OYzh5QVlIbWZrNVIvV3FWV3NNYmtMYnVS?=
+ =?utf-8?B?K1JBRDg4dUNManRhY2VUcFdGbkdPU2xBT2VucllDRndtM2lhaXdjYWpBVmJu?=
+ =?utf-8?B?WHNaVStCV2k2NjR1ZzFuUlRZVDRKaWpxTnpmWUhXclg3Z3ZoYTc4bFl6Yi9w?=
+ =?utf-8?B?MXY3SmxZSUFJNDBLbHFldlhCdFZ1ZldBV1A1YXBKbmMzcFF5SGkzZGozS2x0?=
+ =?utf-8?B?RlVmMDdqcVNhN3M1dGlvaEJHUHVXVTkzY0tQaVJFUTBkdU5Sb2kvdkNORkpT?=
+ =?utf-8?B?MUR4M1UyMnNMN1h3NVc4azBLUDNyaDMvTTdpYjdsTXYycGVtTkdvclZTY01k?=
+ =?utf-8?B?NUtOdDY2RFdDU0lKMUtCbzIzYS9hcjJ2amNhcy9MVHh6ZEdja2FRWU56QjFS?=
+ =?utf-8?B?WXVPVTNma08ycUhtOVRrSjNpWXU5c0swdzZHdTJhRXEzWHZEZDlXV3I0VGxX?=
+ =?utf-8?B?QTAvSllPY1htWlZGbExLQ2IvTExRNXcxSEI4VkZWREVmRDY1V2dDMUQ1NG5p?=
+ =?utf-8?B?OEFtRUJPQUF4clg0YXJ3Y1VqTWk4aCtNVWpTV3lDR2N0MndVR3IvdGpSVk1U?=
+ =?utf-8?B?NTljL2g2MmRpd3A1QlBmci8vdW1qbHRJYThhcythSFdObWJHZ0RXaENFQ3RY?=
+ =?utf-8?B?RmtJdXhjY1pDMTY2c0NqbmR5SDN6MXllM0pwRlhObFdPdVFVL0I3M2JGME42?=
+ =?utf-8?B?L2FPVmF5NEd6MWw0VXU0SjZTS1QvQlRUeExuTDFwcE5VYnQ2UHd0eVp1MFJT?=
+ =?utf-8?B?d2xlQmxzcmZXMGpzdEpVSjNLakE2ZFAwcVBIbUZuWlBJMWpqV3NrdjNRalpo?=
+ =?utf-8?B?RVpzRGQ0K1pBckVmd2c1S2g4bGFzb0pTZTRSLzBXYlpBN2ZiRXFKanhTSjMv?=
+ =?utf-8?B?eDFVWC85YkJXVkF1M3NYYlJhbmVrNnZBYXdHUzBCV0dWMHlrczl6QzhWd3pX?=
+ =?utf-8?B?UG9XQlFxRVFqMm92SGlEWTduVlYvTWUvcGlWTDdKb1cxUlNsN1JNM0dnRzNK?=
+ =?utf-8?B?WXFCMHloa0ZZT29HUGNJYktKSkx2b01GN0pLdDkveFBNRENDcm1HQVNtOXB0?=
+ =?utf-8?B?RUhLYmhrUVIyNGhLY3V2MHp4R1Zwak44TnRBYTd4c2lEaENiZ0J1YzgyVVpZ?=
+ =?utf-8?B?S0NtbEEvaFdZZExxckJnbXdGNWdCNUh4dlNwVGJTbkNvcDJabFhzSVhya3kx?=
+ =?utf-8?B?MjU4bW41bGM0cytrN2p6S2FOVS9XdEdUZ013ZUlDazd0em8xRTRNSndMY3R5?=
+ =?utf-8?B?WEdMbkxXUzdqMXhqamZkdVEwQTlnM3RnTGsrWXg3SUJyRW05RlAwRk5qb3lB?=
+ =?utf-8?B?OXZDZ2tCNzhMcWhKdm9JSHloU2U4ejAxQmxKbm9DT0xpM2R5ZnZ0RWhMRHdK?=
+ =?utf-8?B?L3RnclRqdEJQOWlUeEVmSTlNOTBYVzhZN2x5NjMrSjFaMkFVN1FucU5vbGZ1?=
+ =?utf-8?B?Rk85eTY0MHlRTXAwZEFUejkrVk5yMW5DRHBtdEpnTnhIaDlxWWx2aXo5TE0v?=
+ =?utf-8?B?aG5wVUlKdVBOOWhvRTcvMVhDa0RnTHYxTnlXTi9XVHlGVGg2NkdWeFZKVFZU?=
+ =?utf-8?B?b3VQN0tscXo5SW1sQzVlMllQMWxKQ1NZd0gwM29OdUN6c1lCTHM5cU9mWURU?=
+ =?utf-8?B?YzhEQ2d3YnZERVF5YWhSNmczbXAzWkptUmttN3FGKzExSVBMVHcwa0oxR25k?=
+ =?utf-8?B?RWJJZ2IvS1cxNFNUMXhaUlA5dFZ2algrZ0VrcCtvb2QyYm95MHdnQmNzb2VE?=
+ =?utf-8?Q?0NDeV69xS8VoiLQ8AqFLm0hO0QIlaDoEx03n4oZ9?=
+MIME-Version: 1.0
+
+--0000000000009a4d54065df3ee4e
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
+
+External Email: Use Caution
+
+Dear customer,
+
+Good day, hope all is well.
+
+We talked online this week about the request to update datasheet of those 2
+parts.
+
+Our engineer advsied that customer can inform us when the PCBA order is
+placed and selected those parts then they correct the footprint accordingly.
+
+So , would you inform me once the PCBA order is placed, then I follow up
+this issue with them? thanks.
+
+
+If you need further help please feel free to contact us.
+
+Thanks for your support.
+
+Best regards
+
+Lorraine
+
+
+
+*Lorraine long*
+
+Web: jlcpcb.com
+
+Mail: lorraine@jlcpcb.com
+
+WhatsApp: +85261557940 <https://urldefense.com/v3/__https://wa.me/852615579=
+40__;!!Eh6p8Q!HbazMYRZiAuHFlKw03JKOwt8zY8ENwE9ZtVXpc3SyXrBCn0uLIBJJF2Og3bV_=
+Lew0_vWPbVhPs1s-hNr5_R9D_M$ >
+
+How would you rate my reply=EF=BC=9F   =F0=9F=99=82 Great
+<https://urldefense.com/v3/__https://jlcpcb.com/api/overseasEmailService/wo=
+rkOrderWeb/redirectRatingPage/028BBDEBBDFF7BD34CD2609B1A625A72FF5E5D505A5A1=
+60A/2F4622B7BC60E0DC9E357BFECDBFACF4/1__;!!Eh6p8Q!HbazMYRZiAuHFlKw03JKOwt8z=
+Y8ENwE9ZtVXpc3SyXrBCn0uLIBJJF2Og3bV_Lew0_vWPbVhPs1s-hNr_wAegA4$ >
+   =F0=9F=98=91 Okay
+<https://urldefense.com/v3/__https://jlcpcb.com/api/overseasEmailService/wo=
+rkOrderWeb/redirectRatingPage/028BBDEBBDFF7BD34CD2609B1A625A72FF5E5D505A5A1=
+60A/2F4622B7BC60E0DC9E357BFECDBFACF4/2__;!!Eh6p8Q!HbazMYRZiAuHFlKw03JKOwt8z=
+Y8ENwE9ZtVXpc3SyXrBCn0uLIBJJF2Og3bV_Lew0_vWPbVhPs1s-hNrhmQaBIk$ >
+=F0=9F=99=81 Not Good
+<https://urldefense.com/v3/__https://jlcpcb.com/api/overseasEmailService/wo=
+rkOrderWeb/redirectRatingPage/028BBDEBBDFF7BD34CD2609B1A625A72FF5E5D505A5A1=
+60A/2F4622B7BC60E0DC9E357BFECDBFACF4/3__;!!Eh6p8Q!HbazMYRZiAuHFlKw03JKOwt8z=
+Y8ENwE9ZtVXpc3SyXrBCn0uLIBJJF2Og3bV_Lew0_vWPbVhPs1s-hNr1lDeLMo$ >
+       l      Issue not resolved?   *Escalate Case*
+<https://urldefense.com/v3/__https://jlcpcb.com/api/overseasEmailService/co=
+mplaintWeb/redirectComplaintPage/028BBDEBBDFF7BD34CD2609B1A625A72FF5E5D505A=
+5A160A/2F4622B7BC60E0DC9E357BFECDBFACF4/2__;!!Eh6p8Q!HbazMYRZiAuHFlKw03JKOw=
+t8zY8ENwE9ZtVXpc3SyXrBCn0uLIBJJF2Og3bV_Lew0_vWPbVhPs1s-hNrwtD9zZg$ >
+=EF=BC=9E
+
+--0000000000009a4d54065df3ee4e
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset="UTF-8"
+
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8"><d=
+iv>
+<table align=3D"left" border=3D"1" cellpadding=3D"4" cellspacing=3D"0"><tr>=
+<td align=3D"left" height=3D"0" width=3D"100%"><font face=3D"Arial" color=
+=3D"red"><b>External Email: Use Caution</b></font></font></td></tr></table>=
+<br><br>
+</div><div id=3D"x_1140580906483117jlcReplyAbove" class=3D"jlc-overseas-bod=
+y-block"><p style=3D"font-size:16px;line-height:1.5">Dear customer, </p><p =
+style=3D"font-size:16px;line-height:1.5">Good day, hope all is well. </p><p=
+ style=3D"font-size:16px;line-height:1.5">We talked online this week about =
+the request to update datasheet of those 2 parts.</p><p style=3D"font-size:=
+16px;line-height:1.5">Our engineer advsied that customer can inform us when=
+ the PCBA order is placed and selected those parts then they correct the fo=
+otprint accordingly.</p><p style=3D"font-size:16px;line-height:1.5">So , wo=
+uld you inform me once the PCBA order is placed, then I follow up this issu=
+e with them? thanks.</p><p style=3D"font-size:16px;line-height:1.5"><br></p=
+><p style=3D"font-size:16px;line-height:1.5">If you need further help pleas=
+e feel free to contact us. </p><p style=3D"font-size:16px;line-height:1.5">=
+Thanks for your support. </p><p style=3D"font-size:16px;line-height:1.5">Be=
+st regards</p><p style=3D"font-size:16px;line-height:1.5">Lorraine</p><div =
+id=3D"signature-overseas-jlc" style=3D"font-family:Arial,Helvetica,sans-ser=
+if;font-size:13px;color:#959393;line-height:1.6">
+      <p><br></p>
+      <p><br></p>
+      <table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" style=3D"bord=
+er-collapse:collapse">
+        <tr>
+          <td style=3D"vertical-align:middle;padding-right:12px">
+            <table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" style=
+=3D"border-collapse:separate;background-color:#f5f6f8;border-radius:8px">
+              <tr>
+                <td width=3D"90" height=3D"90" align=3D"center" valign=3D"m=
+iddle" style=3D"width:90px;height:90px;text-align:center;vertical-align:mid=
+dle">
+                  <img src=3D"https://im.jlcpcb.com/api/overseas-im-platfor=
+m/email/file/previewSvg/pcb.svg" width=3D"74" height=3D"48" style=3D"width:=
+ 73.64px; height: 48.25px; vertical-align: middle;">
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td style=3D"vertical-align:middle">
+            <p style=3D"margin:0 0 3px 0"><strong style=3D"color:#333333;fo=
+nt-size:16px">Lorraine  long</strong></p>
+            <p style=3D"margin:1px 0"><img src=3D"https://im.jlcpcb.com/api=
+/overseas-im-platform/email/file/previewPng/web.png" width=3D"16" height=3D=
+"16" style=3D"width: 16px; height: 16px; vertical-align: -3px; margin-right=
+: 4px;"><span style=3D"color:#959393">Web: </span><a href=3D"https://urldef=
+ense.com/v3/__https://jlcpcb.com/__;!!Eh6p8Q!HbazMYRZiAuHFlKw03JKOwt8zY8ENw=
+E9ZtVXpc3SyXrBCn0uLIBJJF2Og3bV_Lew0_vWPbVhPs1s-hNr55SPdvI$" target=3D"_blan=
+k" style=3D"color:#333333;text-decoration:none">jlcpcb.com</a></p>
+            <p style=3D"margin:1px 0"><img src=3D"https://im.jlcpcb.com/api=
+/overseas-im-platform/email/file/previewPng/messages_icon.png" width=3D"16"=
+ height=3D"16" style=3D"width: 16px; height: 16px; vertical-align: -3px; ma=
+rgin-right: 4px;"><span style=3D"color:#959393">Mail: </span><a href=3D"mai=
+lto:lorraine@jlcpcb.com" style=3D"color:#333333;text-decoration:none">lorra=
+ine@jlcpcb.com</a></p>
+            <p style=3D"margin:1px 0"><img src=3D"https://im.jlcpcb.com/api=
+/overseas-im-platform/email/file/previewPng/whatsapp.png" width=3D"16" heig=
+ht=3D"16" style=3D"width: 16px; height: 16px; vertical-align: -3px; margin-=
+right: 4px;"><span style=3D"color:#959393">WhatsApp: </span><a href=3D"http=
+s://urldefense.com/v3/__https://wa.me/85261557940__;!!Eh6p8Q!HbazMYRZiAuHFl=
+Kw03JKOwt8zY8ENwE9ZtVXpc3SyXrBCn0uLIBJJF2Og3bV_Lew0_vWPbVhPs1s-hNr5_R9D_M$"=
+ target=3D"_blank" style=3D"color:#333333;text-decoration:none">+8526155794=
+0</a></p>
+          </td>
+        </tr>
+      </table>
+    </div><div id=3D"jlcRating"><p style=3D"font-size:16px;font-size:16px">=
+<span style=3D"color:rgb(0,0,0);font-size:13px;font-family:=E5=BE=AE=E8=BD=
+=AF=E9=9B=85=E9=BB=91">How would you rate my reply=EF=BC=9F &nbsp; =F0=9F=
+=99=82 </span><a href=3D"https://urldefense.com/v3/__https://jlcpcb.com/api=
+/overseasEmailService/workOrderWeb/redirectRatingPage/028BBDEBBDFF7BD34CD26=
+09B1A625A72FF5E5D505A5A160A/2F4622B7BC60E0DC9E357BFECDBFACF4/1__;!!Eh6p8Q!H=
+bazMYRZiAuHFlKw03JKOwt8zY8ENwE9ZtVXpc3SyXrBCn0uLIBJJF2Og3bV_Lew0_vWPbVhPs1s=
+-hNr_wAegA4$" target=3D"_blank"><span style=3D"color:rgb(115,209,61);font-s=
+ize:13px;font-family:=E5=BE=AE=E8=BD=AF=E9=9B=85=E9=BB=91">Great</span></a>=
+<span style=3D"color:rgb(8,151,156);background-color:rgb(255,255,255);font-=
+size:13px;font-family:=E5=BE=AE=E8=BD=AF=E9=9B=85=E9=BB=91"> &nbsp;</span><=
+span style=3D"color:rgb(0,0,0);background-color:rgb(255,255,255);font-size:=
+13px;font-family:=E5=BE=AE=E8=BD=AF=E9=9B=85=E9=BB=91"> &nbsp;=F0=9F=98=91 =
+</span><a href=3D"https://urldefense.com/v3/__https://jlcpcb.com/api/overse=
+asEmailService/workOrderWeb/redirectRatingPage/028BBDEBBDFF7BD34CD2609B1A62=
+5A72FF5E5D505A5A160A/2F4622B7BC60E0DC9E357BFECDBFACF4/2__;!!Eh6p8Q!HbazMYRZ=
+iAuHFlKw03JKOwt8zY8ENwE9ZtVXpc3SyXrBCn0uLIBJJF2Og3bV_Lew0_vWPbVhPs1s-hNrhmQ=
+aBIk$" target=3D"_blank" style=3D"text-align:start"><span style=3D"color:rg=
+b(89,89,89);font-size:13px;font-family:=E5=BE=AE=E8=BD=AF=E9=9B=85=E9=BB=91=
+">Okay</span></a><span style=3D"color:rgb(89,89,89);background-color:rgb(25=
+5,255,255);font-size:13px;font-family:=E5=BE=AE=E8=BD=AF=E9=9B=85=E9=BB=91"=
+> </span><span style=3D"color:rgb(0,0,0);background-color:rgb(255,255,255);=
+font-size:13px;font-family:=E5=BE=AE=E8=BD=AF=E9=9B=85=E9=BB=91"> &nbsp; =
+=F0=9F=99=81 </span><a href=3D"https://urldefense.com/v3/__https://jlcpcb.c=
+om/api/overseasEmailService/workOrderWeb/redirectRatingPage/028BBDEBBDFF7BD=
+34CD2609B1A625A72FF5E5D505A5A160A/2F4622B7BC60E0DC9E357BFECDBFACF4/3__;!!Eh=
+6p8Q!HbazMYRZiAuHFlKw03JKOwt8zY8ENwE9ZtVXpc3SyXrBCn0uLIBJJF2Og3bV_Lew0_vWPb=
+VhPs1s-hNr1lDeLMo$" target=3D"_blank"><span style=3D"color:rgb(231,95,51);f=
+ont-size:13px;font-family:=E5=BE=AE=E8=BD=AF=E9=9B=85=E9=BB=91">Not Good</s=
+pan></a><span style=3D"font-family:=E5=BE=AE=E8=BD=AF=E9=9B=85=E9=BB=91"> &=
+nbsp; &nbsp; &nbsp; &nbsp;</span><span style=3D"color:rgb(140,140,140);font=
+-size:13px;font-family:=E5=BE=AE=E8=BD=AF=E9=9B=85=E9=BB=91">l </span><span=
+ style=3D"font-family:=E5=BE=AE=E8=BD=AF=E9=9B=85=E9=BB=91"> &nbsp; &nbsp; =
+&nbsp;</span><span style=3D"color:rgb(140,140,140);font-size:13px;font-fami=
+ly:=E5=BE=AE=E8=BD=AF=E9=9B=85=E9=BB=91">Issue not resolved? &nbsp;</span><=
+span style=3D"color:rgb(217,217,217);font-size:13px;font-family:=E5=BE=AE=
+=E8=BD=AF=E9=9B=85=E9=BB=91"> </span><a href=3D"https://urldefense.com/v3/_=
+_https://jlcpcb.com/api/overseasEmailService/complaintWeb/redirectComplaint=
+Page/028BBDEBBDFF7BD34CD2609B1A625A72FF5E5D505A5A160A/2F4622B7BC60E0DC9E357=
+BFECDBFACF4/2__;!!Eh6p8Q!HbazMYRZiAuHFlKw03JKOwt8zY8ENwE9ZtVXpc3SyXrBCn0uLI=
+BJJF2Og3bV_Lew0_vWPbVhPs1s-hNrwtD9zZg$" target=3D""><span style=3D"color:rg=
+b(140,140,140);font-size:13px;font-family:=E5=BE=AE=E8=BD=AF=E9=9B=85=E9=BB=
+=91"><u>Escalate Case</u></span></a><span style=3D"color:rgb(140,140,140);f=
+ont-size:13px;font-family:=E5=BE=AE=E8=BD=AF=E9=9B=85=E9=BB=91">=EF=BC=9E</=
+span></p><p style=3D"font-size:16px;font-size:16px"><br></p><p style=3D"fon=
+t-size:16px;font-size:16px"><br></p><p style=3D"font-size:16px;font-size:16=
+px"><br></p><p style=3D"font-size:16px;font-size:16px"><br></p><p style=3D"=
+font-size:16px;font-size:16px"><br></p><p style=3D"font-size:16px;font-size=
+:16px"><br></p></div><img id=3D"jlc-trace-img" src=3D"https://jlcpcb.com/ap=
+i/overseasEmailService/emailWeb/markAsRead/633972605168218114/6339726051682=
+18113" alt=3D""><p id=3D"x-jlc-thread-id=3D633972605168218114x-jlc-thread-a=
+ccess-id=3D68a8dc907d1f486981bc4a36cbdd9328new"></p></div>
+
+--0000000000009a4d54065df3ee4e--
