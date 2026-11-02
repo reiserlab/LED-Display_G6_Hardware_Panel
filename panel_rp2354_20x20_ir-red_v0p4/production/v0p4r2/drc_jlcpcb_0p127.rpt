@@ -1,0 +1,453 @@
+** Drc report for panel_rp2354_20x20.kicad_pcb **
+** Created on 2026-09-26T16:46:01 **
+** Report includes: Errors, Warnings, Exclusions **
+
+** Found 107 DRC violations **
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1245 mm)
+    Local override; error
+    @(66.8250 mm, 82.2000 mm): Track [/drivers/COL_MCU_02] on B.Cu, length 1.4250 mm
+    @(67.7836 mm, 82.4515 mm): Track [/drivers/COL_MCU_01] on B.Cu, length 0.7149 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(75.1750 mm, 69.5250 mm): Track [Net-(D181-A)] on In2.Cu, length 0.6689 mm
+    @(74.4500 mm, 69.8000 mm): Track [Net-(D221-A)] on In2.Cu, length 1.5500 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(74.4500 mm, 69.8000 mm): Track [Net-(D221-A)] on In2.Cu, length 1.5500 mm
+    @(74.7020 mm, 69.9980 mm): Track [Net-(D181-A)] on In2.Cu, length 1.2040 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(66.4020 mm, 66.5230 mm): Track [/drivers/COL_MCU_18] on B.Cu, length 1.6790 mm
+    @(66.1500 mm, 66.4000 mm): Track [/drivers/COL_MCU_17] on B.Cu, length 1.9250 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(67.0270 mm, 68.4706 mm): Track [/drivers/COL_MCU_19] on B.Cu, length 1.3024 mm
+    @(66.4020 mm, 68.2020 mm): Track [/drivers/COL_MCU_18] on B.Cu, length 0.5275 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(74.4500 mm, 69.8000 mm): Track [Net-(D221-A)] on In2.Cu, length 1.5500 mm
+    @(74.7020 mm, 71.2020 mm): Track [Net-(D181-A)] on In2.Cu, length 0.6689 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(67.0270 mm, 68.4706 mm): Track [/drivers/COL_MCU_19] on B.Cu, length 1.3024 mm
+    @(66.7750 mm, 68.5750 mm): Track [/drivers/COL_MCU_18] on B.Cu, length 1.0750 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(66.1500 mm, 66.4000 mm): Track [/drivers/COL_MCU_17] on B.Cu, length 1.9250 mm
+    @(66.8500 mm, 66.0750 mm): Track [/drivers/COL_MCU_18] on B.Cu, length 0.6336 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(67.0270 mm, 68.4706 mm): Track [/drivers/COL_MCU_19] on B.Cu, length 1.3024 mm
+    @(66.7750 mm, 69.6500 mm): Track [/drivers/COL_MCU_18] on B.Cu, length 0.8485 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(81.7135 mm, 51.7683 mm): Via [Net-(D241-A)] on F.Cu - B.Cu
+    @(81.3500 mm, 51.4142 mm): Track [/drivers/ROW_00] on F.Cu, length 1.6179 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1260 mm)
+    Local override; error
+    @(73.3220 mm, 82.9980 mm): Track [Net-(U2-USB_DP)] on B.Cu, length 0.8033 mm
+    @(73.5750 mm, 83.1028 mm): Track [Net-(U2-USB_DM)] on B.Cu, length 0.8033 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1260 mm)
+    Local override; error
+    @(73.5750 mm, 83.1028 mm): Track [Net-(U2-USB_DM)] on B.Cu, length 0.8033 mm
+    @(73.8900 mm, 82.4300 mm): Track [Net-(U2-USB_DP)] on B.Cu, length 1.0700 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1260 mm)
+    Local override; error
+    @(73.5750 mm, 84.6850 mm): Track [Net-(U2-USB_DM)] on B.Cu, length 1.5822 mm
+    @(72.8000 mm, 84.6800 mm): Track [Net-(U2-USB_DP)] on B.Cu, length 0.7382 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1260 mm)
+    Local override; error
+    @(73.5750 mm, 83.1028 mm): Track [Net-(U2-USB_DM)] on B.Cu, length 0.8033 mm
+    @(73.3220 mm, 84.1580 mm): Track [Net-(U2-USB_DP)] on B.Cu, length 1.1600 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(69.7000 mm, 77.3500 mm): Track [/drivers/COL_MCU_09] on B.Cu, length 0.2503 mm
+    @(69.9520 mm, 76.4520 mm): Track [/drivers/COL_MCU_07] on B.Cu, length 0.9730 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1260 mm)
+    Local override; error
+    @(91.8800 mm, 68.2050 mm): Pad 1 [+5V] of U34 on B.Cu
+    @(90.7370 mm, 69.0570 mm): Track [GND] on B.Cu, length 1.9560 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1259 mm)
+    Local override; error
+    @(52.2750 mm, 78.7500 mm): Track [/panel_header/EINT] on In2.Cu, length 6.9520 mm
+    @(52.6394 mm, 75.0287 mm): Via [Net-(D181-A)] on F.Cu - B.Cu
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(68.8865 mm, 74.7010 mm): Track [/drivers/COL_MCU_11] on B.Cu, length 0.1780 mm
+    @(69.2500 mm, 74.8750 mm): Via [/drivers/COL_MCU_09] on F.Cu - B.Cu
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1247 mm)
+    Local override; error
+    @(77.2386 mm, 70.3250 mm): Via [Net-(D241-A)] on F.Cu - B.Cu
+    @(77.5817 mm, 69.4683 mm): Track [Net-(D261-A)] on In1.Cu, length 1.3550 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(51.8500 mm, 70.4875 mm): Pad 5 [/drivers/COL_12] of U15 on B.Cu
+    @(51.3615 mm, 69.8135 mm): Track [Net-(D241-A)] on B.Cu, length 0.4750 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(51.8500 mm, 70.4875 mm): Pad 5 [/drivers/COL_12] of U15 on B.Cu
+    @(51.3615 mm, 70.2885 mm): Track [Net-(D241-A)] on B.Cu, length 0.9072 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1260 mm)
+    Local override; error
+    @(86.4695 mm, 69.0195 mm): Track [GND] on B.Cu, length 1.7210 mm
+    @(87.4675 mm, 68.1675 mm): Pad 1 [+5V] of U29 on B.Cu
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(69.5230 mm, 77.5270 mm): Track [/drivers/COL_MCU_09] on B.Cu, length 0.9460 mm
+    @(68.8000 mm, 77.2750 mm): Track [/drivers/COL_MCU_11] on B.Cu, length 0.9546 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(68.7557 mm, 75.3693 mm): Track [/drivers/COL_MCU_09] on B.Cu, length 0.2800 mm
+    @(68.4500 mm, 75.7000 mm): Track [/drivers/COL_MCU_11] on B.Cu, length 1.3803 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1253 mm)
+    Local override; error
+    @(78.2336 mm, 70.0612 mm): Via [Net-(D281-A)] on F.Cu - B.Cu
+    @(77.3386 mm, 70.4250 mm): Track [Net-(D241-A)] on In1.Cu, length 1.3364 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1260 mm)
+    Local override; error
+    @(52.8350 mm, 63.9700 mm): Pad 2 [GND] of U16 on B.Cu
+    @(52.5020 mm, 63.1180 mm): Track [+5V] on B.Cu, length 2.1960 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(69.9520 mm, 76.4520 mm): Track [/drivers/COL_MCU_07] on B.Cu, length 0.9730 mm
+    @(69.7000 mm, 76.5936 mm): Track [/drivers/COL_MCU_09] on B.Cu, length 0.7564 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(69.4260 mm, 76.6760 mm): Track [/drivers/COL_MCU_11] on B.Cu, length 0.3980 mm
+    @(68.7557 mm, 75.6493 mm): Track [/drivers/COL_MCU_09] on B.Cu, length 1.3354 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1263 mm)
+    Local override; error
+    @(81.5783 mm, 74.8633 mm): Track [/drivers/ROW_07] on In2.Cu, length 0.4916 mm
+    @(81.3250 mm, 75.1000 mm): Track [Net-(D301-A)] on In2.Cu, length 0.8375 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(66.8314 mm, 73.4000 mm): Track [/drivers/COL_MCU_17] on B.Cu, length 0.7721 mm
+    @(65.5000 mm, 72.4250 mm): Track [/drivers/COL_MCU_16] on B.Cu, length 1.9445 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1263 mm)
+    Local override; error
+    @(81.3250 mm, 75.1000 mm): Track [Net-(D301-A)] on In2.Cu, length 0.8375 mm
+    @(81.7772 mm, 75.0622 mm): Track [/drivers/ROW_07] on In2.Cu, length 0.2813 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1263 mm)
+    Local override; error
+    @(81.3250 mm, 75.1000 mm): Track [Net-(D301-A)] on In2.Cu, length 0.8375 mm
+    @(81.5783 mm, 74.3717 mm): Track [/drivers/ROW_07] on In2.Cu, length 0.5610 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(65.5000 mm, 72.4250 mm): Track [/drivers/COL_MCU_16] on B.Cu, length 1.9445 mm
+    @(65.8532 mm, 72.4218 mm): Track [/drivers/COL_MCU_17] on B.Cu, length 1.3834 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(66.1500 mm, 66.4000 mm): Track [/drivers/COL_MCU_17] on B.Cu, length 1.9250 mm
+    @(66.4020 mm, 68.2020 mm): Track [/drivers/COL_MCU_18] on B.Cu, length 0.5275 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1260 mm)
+    Local override; error
+    @(66.2105 mm, 65.6371 mm): Via [Net-(D101-A)] on F.Cu - B.Cu
+    @(66.5750 mm, 65.4851 mm): Track [/drivers/COL_MCU_17] on B.Cu, length 0.4899 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(65.5000 mm, 72.4250 mm): Track [/drivers/COL_MCU_16] on B.Cu, length 1.9445 mm
+    @(65.8532 mm, 70.1968 mm): Track [/drivers/COL_MCU_17] on B.Cu, length 2.2250 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(67.2964 mm, 70.0036 mm): Track [/drivers/ROW_MCU_00] on B.Cu, length 1.8072 mm
+    @(67.5484 mm, 68.6504 mm): Track [/drivers/COL_MCU_15] on B.Cu, length 0.7773 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1255 mm)
+    Local override; error
+    @(68.2000 mm, 81.2500 mm): Track [/drivers/COL_MCU_03] on B.Cu, length 0.4999 mm
+    @(68.3000 mm, 81.6000 mm): Via [Net-(D161-A)] on F.Cu - B.Cu
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1255 mm)
+    Local override; error
+    @(67.8750 mm, 81.2500 mm): Track [/drivers/COL_MCU_03] on B.Cu, length 0.3250 mm
+    @(68.3000 mm, 81.6000 mm): Via [Net-(D161-A)] on F.Cu - B.Cu
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(67.5484 mm, 67.7942 mm): Track [/drivers/COL_MCU_15] on B.Cu, length 0.8562 mm
+    @(67.2964 mm, 68.1964 mm): Track [/drivers/ROW_MCU_00] on B.Cu, length 0.4899 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(92.6500 mm, 80.5000 mm): Track [Net-(D341-A)] on In2.Cu, length 0.2093 mm
+    @(92.2500 mm, 79.3438 mm): Track [/drivers/ROW_16] on In2.Cu, length 7.7648 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1254 mm)
+    Local override; error
+    @(78.5389 mm, 85.4938 mm): Track [/panel_header/CS0] on B.Cu, length 3.5049 mm
+    @(78.1200 mm, 83.9800 mm): Pad 2 [/panel_mcu/VREG_AVDD] of R6 on B.Cu
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(68.3250 mm, 74.3675 mm): Via [+3V3] on F.Cu - B.Cu
+    @(68.1934 mm, 74.7500 mm): Track [/drivers/COL_MCU_15] on B.Cu, length 0.2121 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1260 mm)
+    Local override; error
+    @(90.8420 mm, 73.3020 mm): Track [GND] on B.Cu, length 1.6360 mm
+    @(91.8750 mm, 72.4500 mm): Pad 1 [+5V] of U36 on B.Cu
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(67.5484 mm, 67.7942 mm): Track [/drivers/COL_MCU_15] on B.Cu, length 0.8562 mm
+    @(67.2964 mm, 70.0036 mm): Track [/drivers/ROW_MCU_00] on B.Cu, length 1.8072 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(68.0980 mm, 69.2000 mm): Track [/drivers/COL_MCU_15] on B.Cu, length 2.6730 mm
+    @(68.3500 mm, 68.8549 mm): Track [/drivers/COL_MCU_11] on B.Cu, length 2.8951 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(67.5484 mm, 68.6504 mm): Track [/drivers/COL_MCU_15] on B.Cu, length 0.7773 mm
+    @(68.3500 mm, 68.8549 mm): Track [/drivers/COL_MCU_11] on B.Cu, length 2.8951 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(68.3500 mm, 71.7500 mm): Track [/drivers/COL_MCU_11] on B.Cu, length 0.2121 mm
+    @(68.0980 mm, 69.2000 mm): Track [/drivers/COL_MCU_15] on B.Cu, length 2.6730 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(69.5230 mm, 77.5270 mm): Track [/drivers/COL_MCU_09] on B.Cu, length 0.9460 mm
+    @(69.4260 mm, 77.0740 mm): Track [/drivers/COL_MCU_11] on B.Cu, length 0.2843 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(69.4260 mm, 76.6760 mm): Track [/drivers/COL_MCU_11] on B.Cu, length 0.3980 mm
+    @(69.0625 mm, 76.8500 mm): Via [+1V1] on F.Cu - B.Cu
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(69.5230 mm, 77.5270 mm): Track [/drivers/COL_MCU_09] on B.Cu, length 0.9460 mm
+    @(69.2250 mm, 77.2750 mm): Track [/drivers/COL_MCU_11] on B.Cu, length 0.4250 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(68.4500 mm, 75.7000 mm): Track [/drivers/COL_MCU_11] on B.Cu, length 1.3803 mm
+    @(68.7557 mm, 75.6493 mm): Track [/drivers/COL_MCU_09] on B.Cu, length 1.3354 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1260 mm)
+    Local override; error
+    @(74.3000 mm, 81.6922 mm): Track [Net-(U2-USB_DM)] on B.Cu, length 0.7957 mm
+    @(74.7000 mm, 81.6500 mm): Track [+1V1] on B.Cu, length 0.4243 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1260 mm)
+    Local override; error
+    @(74.1470 mm, 81.8452 mm): Track [Net-(U2-USB_DM)] on B.Cu, length 0.2164 mm
+    @(74.7000 mm, 81.6500 mm): Track [+1V1] on B.Cu, length 0.4243 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(69.2500 mm, 74.8750 mm): Via [/drivers/COL_MCU_09] on F.Cu - B.Cu
+    @(68.8865 mm, 74.8790 mm): Track [/drivers/COL_MCU_11] on B.Cu, length 0.7014 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1260 mm)
+    Local override; error
+    @(73.3220 mm, 82.9980 mm): Track [Net-(U2-USB_DP)] on B.Cu, length 0.8033 mm
+    @(73.5750 mm, 84.6850 mm): Track [Net-(U2-USB_DM)] on B.Cu, length 1.5822 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1260 mm)
+    Local override; error
+    @(74.4000 mm, 81.9500 mm): Track [+1V1] on B.Cu, length 1.2750 mm
+    @(74.1430 mm, 82.5170 mm): Track [Net-(U2-USB_DM)] on B.Cu, length 0.0057 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1260 mm)
+    Local override; error
+    @(74.7000 mm, 81.6500 mm): Track [+1V1] on B.Cu, length 0.4243 mm
+    @(74.1470 mm, 82.5130 mm): Track [Net-(U2-USB_DM)] on B.Cu, length 0.6678 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1255 mm)
+    Local override; error
+    @(68.7360 mm, 70.2141 mm): Via [Net-(D201-A)] on F.Cu - B.Cu
+    @(69.1000 mm, 64.5975 mm): Track [/drivers/ROW_MCU_02] on B.Cu, length 6.5060 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(92.5020 mm, 81.3000 mm): Track [Net-(D341-A)] on In2.Cu, length 1.0435 mm
+    @(92.2500 mm, 79.3438 mm): Track [/drivers/ROW_16] on In2.Cu, length 7.7648 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(92.5020 mm, 80.6480 mm): Track [Net-(D341-A)] on In2.Cu, length 0.6520 mm
+    @(92.2500 mm, 79.3438 mm): Track [/drivers/ROW_16] on In2.Cu, length 7.7648 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1260 mm)
+    Local override; error
+    @(74.4000 mm, 81.9500 mm): Track [+1V1] on B.Cu, length 1.2750 mm
+    @(74.1470 mm, 81.8452 mm): Track [Net-(U2-USB_DM)] on B.Cu, length 0.2164 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(70.1780 mm, 81.6316 mm): Via [Net-(D201-A)] on F.Cu - B.Cu
+    @(68.6198 mm, 82.7052 mm): Track [/drivers/COL_MCU_00] on B.Cu, length 1.7398 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(66.7750 mm, 68.5750 mm): Track [/drivers/COL_MCU_18] on B.Cu, length 1.0750 mm
+    @(66.6750 mm, 68.1186 mm): Track [/drivers/COL_MCU_19] on B.Cu, length 0.4978 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(66.4020 mm, 68.2020 mm): Track [/drivers/COL_MCU_18] on B.Cu, length 0.5275 mm
+    @(66.6750 mm, 66.7000 mm): Track [/drivers/COL_MCU_19] on B.Cu, length 1.4186 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1245 mm)
+    Local override; error
+    @(66.8250 mm, 82.2000 mm): Track [/drivers/COL_MCU_02] on B.Cu, length 1.4250 mm
+    @(66.0818 mm, 84.1533 mm): Track [/drivers/COL_MCU_01] on B.Cu, length 2.4067 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1250 mm)
+    Local override; error
+    @(70.1780 mm, 81.6316 mm): Via [Net-(D201-A)] on F.Cu - B.Cu
+    @(69.8500 mm, 81.4750 mm): Track [/drivers/COL_MCU_00] on B.Cu, length 0.5285 mm
+[clearance]: Clearance violation ( clearance 0.1270 mm; actual 0.1245 mm)
+    Local override; error
+    @(67.7836 mm, 82.4515 mm): Track [/drivers/COL_MCU_01] on B.Cu, length 0.7149 mm
+    @(68.2500 mm, 82.2000 mm): Track [/drivers/COL_MCU_02] on B.Cu, length 1.2021 mm
+[courtyards_overlap]: Courtyards overlap
+    Rule: board setup constraints courtyard; error
+    @(50.6400 mm, 87.5150 mm): Footprint R11
+    @(52.8000 mm, 86.1875 mm): Footprint U5
+[courtyards_overlap]: Courtyards overlap
+    Rule: board setup constraints courtyard; error
+    @(50.7000 mm, 71.2500 mm): Footprint R21
+    @(50.6600 mm, 72.7450 mm): Footprint C28
+[courtyards_overlap]: Courtyards overlap
+    Rule: board setup constraints courtyard; error
+    @(50.7000 mm, 71.2500 mm): Footprint R21
+    @(52.8000 mm, 69.3500 mm): Footprint U15
+[courtyards_overlap]: Courtyards overlap
+    Rule: board setup constraints courtyard; error
+    @(57.2775 mm, 81.9950 mm): Footprint U6
+    @(55.1250 mm, 83.1600 mm): Footprint R12
+[courtyards_overlap]: Courtyards overlap
+    Rule: board setup constraints courtyard; error
+    @(57.2775 mm, 81.9950 mm): Footprint U6
+    @(55.3200 mm, 79.1450 mm): Footprint R14
+[courtyards_overlap]: Courtyards overlap
+    Rule: board setup constraints courtyard; error
+    @(57.2825 mm, 86.1950 mm): Footprint U4
+    @(55.1400 mm, 87.5600 mm): Footprint R10
+[courtyards_overlap]: Courtyards overlap
+    Rule: board setup constraints courtyard; error
+    @(65.0800 mm, 62.5700 mm): Footprint R24
+    @(67.2125 mm, 60.9750 mm): Footprint U18
+[courtyards_overlap]: Courtyards overlap
+    Rule: board setup constraints courtyard; error
+    @(55.1500 mm, 70.7200 mm): Footprint R20
+    @(57.2750 mm, 69.3625 mm): Footprint U14
+[courtyards_overlap]: Courtyards overlap
+    Rule: board setup constraints courtyard; error
+    @(52.8350 mm, 65.1075 mm): Footprint U16
+    @(50.8500 mm, 66.4650 mm): Footprint R22
+[courtyards_overlap]: Courtyards overlap
+    Rule: board setup constraints courtyard; error
+    @(61.7250 mm, 69.3675 mm): Footprint U13
+    @(59.5800 mm, 70.7150 mm): Footprint R19
+[courtyards_overlap]: Courtyards overlap
+    Rule: board setup constraints courtyard; error
+    @(55.1200 mm, 66.4450 mm): Footprint R26
+    @(57.2700 mm, 65.1225 mm): Footprint U20
+[courtyards_overlap]: Courtyards overlap
+    Rule: board setup constraints courtyard; error
+    @(52.8000 mm, 69.3500 mm): Footprint U15
+    @(50.8500 mm, 66.4650 mm): Footprint R22
+[courtyards_overlap]: Courtyards overlap
+    Rule: board setup constraints courtyard; error
+    @(67.2125 mm, 52.3250 mm): Footprint U21
+    @(65.0875 mm, 53.6825 mm): Footprint R27
+[courtyards_overlap]: Courtyards overlap
+    Rule: board setup constraints courtyard; error
+    @(65.0900 mm, 58.2250 mm): Footprint R23
+    @(67.2250 mm, 56.7125 mm): Footprint U17
+[courtyards_overlap]: Courtyards overlap
+    Rule: board setup constraints courtyard; error
+    @(57.2750 mm, 73.6050 mm): Footprint U11
+    @(55.2700 mm, 74.9650 mm): Footprint R17
+[courtyards_overlap]: Courtyards overlap
+    Rule: board setup constraints courtyard; error
+    @(52.8100 mm, 77.7775 mm): Footprint U9
+    @(50.8300 mm, 79.1550 mm): Footprint R15
+[courtyards_overlap]: Courtyards overlap
+    Rule: board setup constraints courtyard; error
+    @(55.3200 mm, 79.1450 mm): Footprint R14
+    @(57.2825 mm, 77.8050 mm): Footprint U8
+[courtyards_overlap]: Courtyards overlap
+    Rule: board setup constraints courtyard; error
+    @(61.7425 mm, 86.2150 mm): Footprint U3
+    @(59.6000 mm, 87.5550 mm): Footprint R9
+[courtyards_overlap]: Courtyards overlap
+    Rule: board setup constraints courtyard; error
+    @(59.5800 mm, 74.9750 mm): Footprint R16
+    @(61.7350 mm, 73.6250 mm): Footprint U10
+[silk_overlap]: Silkscreen clearance
+    Rule: board setup constraints silk; warning
+    @(76.7000 mm, 70.8500 mm): Segment of U2 on B.Silkscreen
+    @(78.4000 mm, 70.6000 mm): PCB text '1|2: IN-S42CTQIR' on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(67.2000 mm, 75.6000 mm): PCB text 'LED
+0 1
+2 3' on B.Silkscreen
+    @(66.0300 mm, 73.9600 mm): Pad 1 [+3V3] of C11 on B.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(67.2000 mm, 75.6000 mm): PCB text 'LED
+0 1
+2 3' on B.Silkscreen
+    @(65.3900 mm, 73.9600 mm): Pad 2 [GND] of C11 on B.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(78.4000 mm, 70.6000 mm): PCB text '1|2: IN-S42CTQIR' on B.Silkscreen
+    @(73.8600 mm, 69.4400 mm): Pad 1 [+1V1] of C8 on B.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(78.4000 mm, 70.6000 mm): PCB text '1|2: IN-S42CTQIR' on B.Silkscreen
+    @(71.7000 mm, 69.4500 mm): Pad 1 [+3V3] of C13 on B.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(72.2000 mm, 83.8000 mm): PCB text 'R: 47|100Ω' on B.Silkscreen
+    @(69.9600 mm, 83.5950 mm): Pad 2 [GND] of C18 on B.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(80.0000 mm, 85.0000 mm): PCB text 'G6 RIRI 45mm RP2354' on B.Silkscreen
+    @(79.2700 mm, 75.6800 mm): Pad 2 [GND] of C15 on B.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(80.0000 mm, 85.0000 mm): PCB text 'G6 RIRI 45mm RP2354' on B.Silkscreen
+    @(79.2600 mm, 76.4700 mm): Pad 2 [GND] of C9 on B.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(80.0000 mm, 85.0000 mm): PCB text 'G6 RIRI 45mm RP2354' on B.Silkscreen
+    @(79.1600 mm, 79.3100 mm): Pad 2 [GND] of C16 on B.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(80.0000 mm, 85.0000 mm): PCB text 'G6 RIRI 45mm RP2354' on B.Silkscreen
+    @(78.5200 mm, 79.3100 mm): Pad 1 [+3V3] of C16 on B.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(80.0000 mm, 85.0000 mm): PCB text 'G6 RIRI 45mm RP2354' on B.Silkscreen
+    @(79.2600 mm, 70.6350 mm): Pad 2 [GND] of C14 on B.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(80.0000 mm, 85.0000 mm): PCB text 'G6 RIRI 45mm RP2354' on B.Silkscreen
+    @(79.2600 mm, 71.2750 mm): Pad 1 [+3V3] of C14 on B.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(80.0000 mm, 85.0000 mm): PCB text 'G6 RIRI 45mm RP2354' on B.Silkscreen
+    @(79.5800 mm, 73.4250 mm): Pad 1 [Net-(U2-GPIO43_ADC3)] of R29 on B.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(50.7500 mm, 92.5000 mm): Rectangle of J3 on B.Silkscreen
+    @(55.1400 mm, 88.0700 mm): Pad 1 [/drivers/COL_01] of R10 on B.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(50.7500 mm, 92.5000 mm): Rectangle of J3 on B.Silkscreen
+    @(59.6000 mm, 88.0650 mm): Pad 1 [/drivers/COL_00] of R9 on B.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(51.3100 mm, 72.1225 mm): Polygon of U12 on B.Silkscreen
+    @(50.7000 mm, 71.7600 mm): Pad 1 [/drivers/COL_12] of R21 on B.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(62.6000 mm, 76.6000 mm): PCB text 'boot' on B.Silkscreen
+    @(59.5800 mm, 75.4850 mm): Pad 1 [/drivers/COL_07] of R16 on B.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(62.6000 mm, 76.6000 mm): PCB text 'boot' on B.Silkscreen
+    @(60.8700 mm, 77.2200 mm): Pad 1 [GND] of SW1 on B.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(62.6000 mm, 76.6000 mm): PCB text 'boot' on B.Silkscreen
+    @(62.6850 mm, 74.7625 mm): Pad 4 [GND] of U10 on B.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(62.6000 mm, 76.6000 mm): PCB text 'boot' on B.Silkscreen
+    @(60.7850 mm, 74.7625 mm): Pad 5 [/drivers/COL_07] of U10 on B.Cu
+
+** Found 0 unconnected pads **
+
+** Found 0 Footprint errors **
+
+** Ignored checks **
+    - Footprint has no courtyard defined
+    - Track endpoint not centered on via
+    - Tuning profile track geometries
+    - Footprint doesn't match symbol's footprint filters
+    - Silkscreen clipped by board edge
+    - PTH inside courtyard
+    - NPTH inside courtyard
+    - Footprint component type doesn't match footprint pads
+
+** End of Report **
